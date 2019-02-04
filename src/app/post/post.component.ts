@@ -11,7 +11,7 @@ import {HackerNewsService} from '../hacker-news.service';
 export class PostComponent implements OnInit {
 
   private id: number;
-  private item: Story;
+  item: Story;
 
   constructor(private route: ActivatedRoute, private hackerNewsService: HackerNewsService) { }
 

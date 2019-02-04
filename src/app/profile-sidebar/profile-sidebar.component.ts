@@ -10,7 +10,7 @@ import {User} from '../user';
 export class ProfileSidebarComponent implements OnInit {
 
   @Input() by: string;
-  private user: User;
+  user: User;
 
   constructor(private hackerNewsService: HackerNewsService) { }
 

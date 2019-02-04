@@ -7,7 +7,9 @@ import {HackerNewsService, HN_SECTION} from '../hacker-news.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
   section: string[];
+
   constructor(public hackerNewsService: HackerNewsService) { }
 
   ngOnInit() {

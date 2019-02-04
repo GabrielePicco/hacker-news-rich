@@ -3,14 +3,14 @@
     <time class="timeline-time" datetime="">{{ item.time * 1000 | date: 'yyyy-MM-dd h:mm'}}</time>
     <i class="ms-timeline-point"></i>
   </div>
-  <div class="card card-primary">
+  <div *ngIf="parentStory != undefined" class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Commented:  <a style="color: white;" href="/post/{{ parentStory.id }}">"{{ parentStory.title }}"</a></h3>
+      <h3 class="card-title">Commented:  <a class="color-white" href="/post/{{ parentStory.id }}">"{{ parentStory.title }}"</a></h3>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-sm-4 zoom-img">
-          <a href="{{ 'post/' + parentStory.id }}">
+          <a [href]="'post/' + parentStory.id">
             <img [src]="parentStory.leadImageUrl" alt="" class="img-fluid mb-4">
           </a>
         </div>

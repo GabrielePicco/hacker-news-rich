@@ -9,7 +9,7 @@ import {HackerNewsService} from '../hacker-news.service';
 export class CommentComponent implements OnInit {
 
   @Input() id: number;
-  private comment: Comment;
+  comment: Comment;
 
   constructor(private hackerNewsService: HackerNewsService) { }
 

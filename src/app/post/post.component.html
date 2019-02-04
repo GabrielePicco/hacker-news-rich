@@ -14,7 +14,7 @@
           <img [src]="item.leadImageUrl" class="img-fluid mb-4">
           <p [innerHTML]="item.text"></p>
           <a *ngIf="item.url != undefined" [href]="item.url" class="btn btn-primary btn-raised btn-block animate-icon">Read the original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
-          <a *ngIf="item.url != undefined" [href]="item.url" class="btn btn-primary btn-raised btn-block"><i class="mr-1 no-mr zmdi zmdi-comments"></i>Add Comment</a>
+          <a [href]="item.url" class="btn btn-primary btn-raised btn-block"><i class="mr-1 no-mr zmdi zmdi-comments"></i>Add Comment</a>
         </div>
       </div>
     </div>

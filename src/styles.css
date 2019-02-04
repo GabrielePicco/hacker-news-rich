@@ -10191,8 +10191,8 @@ label.color-white {
 
 @font-face {
   font-family: Glyphicons Halflings;
-  src: url(../fonts/glyphicons-halflings-regular.eot);
-  src: url(../fonts/glyphicons-halflings-regular.eot?#iefix) format("embedded-opentype"), url(../fonts/glyphicons-halflings-regular.woff2) format("woff2"), url(../fonts/glyphicons-halflings-regular.woff) format("woff"), url(../fonts/glyphicons-halflings-regular.ttf) format("truetype"), url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format("svg")
+  src: url(assets/fonts/glyphicons-halflings-regular.eot);
+  src: url(assets/fonts/glyphicons-halflings-regular.eot?#iefix) format("embedded-opentype"), url(assets/fonts/glyphicons-halflings-regular.woff2) format("woff2"), url(assets/fonts/glyphicons-halflings-regular.woff) format("woff"), url(assets/fonts/glyphicons-halflings-regular.ttf) format("truetype"), url(assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format("svg")
 }
 
 .glyphicon {
@@ -12247,10 +12247,6 @@ a.img-thumbnail:hover, a.img-thumbnail:focus {
   font-size: 3rem !important
 }
 
-.owl-carousel .owl-video-play-icon {
-  background: url(../img/owl.video.play.png) no-repeat
-}
-
 .owl-carousel .owl-stage-outer .owl-stage .owl-item.active .card {
   animation-name: fadeInUp;
   animation-duration: 1s;
@@ -12562,7 +12558,7 @@ a.img-thumbnail:hover, a.img-thumbnail:focus {
 }
 
 .ms-hero.ms-hero-black {
-  background-image: url(../img/black_wall.png);
+
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -12885,7 +12881,6 @@ a.img-thumbnail:hover, a.img-thumbnail:focus {
 .wrap.wrap-mountain {
   background-color: #424242;
   color: #fafafa;
-  background-image: url(../img/back_mountain.jpg);
   background-position: center center;
   background-size: cover;
   position: relative;
@@ -13011,78 +13006,74 @@ a.img-thumbnail:hover, a.img-thumbnail:focus {
 }
 
 .ms-hero-img-city {
-  background-image: url(../img/skyline.jpg);
   background-size: cover;
   background-position: center center
 }
 
 .ms-hero-img-city2 {
-  background-image: url(../img/skyline2.jpg);
   background-size: cover;
   background-position: center center
 }
 
 .ms-hero-img-airplane {
-  background-image: url(../img/backAirplane.jpg);
   background-size: cover;
   background-position: center center
 }
 
 .ms-hero-img-team {
-  background-image: url(../img/team2.jpg);
   background-size: cover;
   background-position: center center
 }
 
 .ms-hero-img-mountain {
-  background-image: url(../img/mountain.jpg);
+
   background-size: cover;
   background-position: center center
 }
 
 .ms-hero-img-coffee {
-  background-image: url(../img/coffee.jpg);
+
   background-size: cover;
   background-position: center center
 }
 
 .ms-hero-img-meeting {
-  background-image: url(../img/meeting.jpg);
+
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat
 }
 
 .ms-hero-img-keyboard {
-  background-image: url(../img/keyboard.jpg);
+
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat
 }
 
 .ms-hero-img-beach {
-  background-image: url(../img/beach.jpg);
+
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat
 }
 
 .ms-hero-img-road {
-  background-image: url(../img/road.jpg);
+
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat
 }
 
 .ms-hero-img-wall {
-  background-image: url(../img/black_wall.png);
+
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat
 }
 
 .ms-hero-img-room {
-  background-image: url(../img/room.jpg);
+
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat
@@ -13546,7 +13537,7 @@ body.lb-disable-scrolling {
   width: 32px;
   height: 32px;
   margin: 0 auto;
-  background: url(../img/loading.gif) no-repeat
+  background: url(assets/img/loading.gif) no-repeat
 }
 
 .lb-nav {
@@ -13577,7 +13568,7 @@ body.lb-disable-scrolling {
   width: 34%;
   left: 0;
   float: left;
-  background: url(../img/prev.png) left 48% no-repeat;
+  background: url(assets/img/prev.png) left 48% no-repeat;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -13594,7 +13585,7 @@ body.lb-disable-scrolling {
   width: 64%;
   right: 0;
   float: right;
-  background: url(../img/next.png) right 48% no-repeat;
+  background: url(assets/img/next.png) right 48% no-repeat;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -13657,7 +13648,7 @@ body.lb-disable-scrolling {
   float: right;
   width: 30px;
   height: 30px;
-  background: url(../img/close.png) top right no-repeat;
+  background: url(assets/img/close.png) top right no-repeat;
   text-align: right;
   outline: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
@@ -15949,7 +15940,7 @@ body.lb-disable-scrolling {
 
 .ms-slidebar .ms-slidebar-header {
   min-height: 150px;
-  background-image: url(../img/bg-slidebar.png);
+  background-image: url(assets/img/bg-slidebar.png);
   position: relative
 }
 

@@ -10,9 +10,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  private user: User;
-  private username: string;
-  private current = {activities : []};
+  user: User;
+  username: string;
+  current = {activities : []};
   private startIndex = 0;
   private pageSize = 5;
 
