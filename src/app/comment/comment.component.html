@@ -1,0 +1,24 @@
+<li *ngIf="comment != undefined && (comment.deleted == undefined || comment.deleted == false)" class="ms-timeline-item wow materialUp">
+  <div class="ms-timeline-date">
+    <time class="timeline-time" datetime="12:53">
+      <p class="mt-1">{{ comment.time * 1000 | date: 'yyyy-MM-dd h:mm'}}</p>
+    </time>
+    <i class="ms-timeline-point bg-primary"></i>
+  </div>
+  <div class="card card-primary">
+    <div style="background: whitesmoke;" class="card-header">
+      <h3 style="color: gray" class="card-title">By <a href="/profile/{{ comment.by }}" > {{ comment.by }} </a></h3>
+    </div>
+    <div class="card-body">
+      <p [innerHTML]="comment.text"></p>
+    </div>
+  </div>
+  <div *ngIf="comment.kids != undefined" class="row wow materialUp animation-delay-8">
+    <div class="col-md-12">
+      <ul class="ms-timeline">
+        <app-comment *ngFor='let id of comment.kids' [id]="id"></app-comment>
+      </ul>
+    </div>
+  </div>
+</li>
+

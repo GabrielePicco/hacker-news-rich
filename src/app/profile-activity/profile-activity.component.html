@@ -1,0 +1,51 @@
+<li *ngIf="item != undefined && item.type === 'comment' && item.deleted == undefined" class="ms-timeline-item wow materialUp">
+  <div class="ms-timeline-date">
+    <time class="timeline-time" datetime="">{{ item.time * 1000 | date: 'yyyy-MM-dd h:mm'}}</time>
+    <i class="ms-timeline-point"></i>
+  </div>
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Commented:  <a style="color: white;" href="/post/{{ parentStory.id }}">"{{ parentStory.title }}"</a></h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-4 zoom-img">
+          <a href="{{ 'post/' + parentStory.id }}">
+            <img [src]="parentStory.leadImageUrl" alt="" class="img-fluid mb-4">
+          </a>
+        </div>
+        <div class="col-sm-8">
+          <p [innerHTML]="item.text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li *ngIf="item != undefined && item.type === 'story'" class="ms-timeline-item wow materialUp">
+  <div class="ms-timeline-date">
+    <time class="timeline-time" datetime="">{{ item.time * 1000 | date: 'yyyy-MM-dd h:mm'}}</time>
+    <i class="ms-timeline-point"></i>
+  </div>
+  <div class="card card-royal">
+    <div class="card-header">
+      <h3 class="card-title">Submitted:   <a style="color: white;" href="/post/{{ item.id }}">"{{ item.title }}"</a></h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-4 zoom-img">
+          <a href="{{ 'post/' + item.id }}">
+            <img [src]="item.leadImageUrl" alt="" class="img-fluid mb-4">
+          </a>
+        </div>
+        <div class="col-sm-8">
+          <p>
+            <span class="d-none d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }} points</span></span>
+            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }} comments</span></span>
+            <span class="ml-1">{{item.domain}}</span>
+          </p>
+          <p [innerHTML]="((item.description !== undefined && item.description.length > 400 ? (item.description | slice:0:300) + '...' : item.description) | emojify)"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,10 @@
+<div *ngIf="user != undefined" class="card animated fadeInUp animation-delay-7">
+  <div class="ms-hero-bg-info ms-hero-img-mountain">
+    <a href="profile/{{ by }}">
+      <h3 class="color-white index-1 text-center no-m pt-4">{{ by }}</h3>
+    </a>
+    <div class="color-medium index-1 text-center np-m">Karma: {{ user.karma }}</div>
+    <img src="{{ user.profileImage }}" alt="..." class="img-avatar-circle">
+  </div>
+  <div class="card-body pt-4 text-center"></div>
+</div>
