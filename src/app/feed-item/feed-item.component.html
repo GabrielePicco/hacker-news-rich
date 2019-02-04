@@ -2,7 +2,7 @@
   <div *ngIf="item !== undefined" class="card card-primary wow zoomInRight mb-4" style="visibility:hidden">
     <div class="card-body overflow-hidden card-body-big">
       <div class="row">
-        <div class="col-xl-6 zoom-img">
+        <div class="col-xl-6">
           <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}">
             <img [src]="item.leadImageUrl" alt="" class="img-fluid mb-4">
           </a>

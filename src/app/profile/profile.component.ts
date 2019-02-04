@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HackerNewsService} from '../hacker-news.service';
 import {User} from '../user';
 import {ActivatedRoute} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -16,13 +17,14 @@ export class ProfileComponent implements OnInit {
   private startIndex = 0;
   private pageSize = 5;
 
-  constructor(private route: ActivatedRoute, private hackerNewsService: HackerNewsService) { }
+  constructor(private titleService: Title, private route: ActivatedRoute, private hackerNewsService: HackerNewsService) { }
 
   ngOnInit() {
     this.username = this.route.snapshot.params['username'];
     this.hackerNewsService.getUserByUsername(this.username).subscribe(user => {
       this.user = user;
       this.onScroll();
+      this.titleService.setTitle(user.id);
     });
   }
 

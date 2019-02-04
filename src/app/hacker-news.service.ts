@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, mergeMap, tap} from 'rxjs/operators';
 import {Story} from './story';
 import {User} from './user';
+import {ActivatedRoute} from "@angular/router";
 
 const mercuryHttpOptions = {
   headers: new HttpHeaders({
@@ -44,9 +45,14 @@ export class HackerNewsService {
   private newsIDs: number[] = [];
   private currentPosition: number;
   private batchSize = 3;
-  private currentSection = HN_SECTION[0];
+  private currentSection = HN_SECTION[0].name;
+  TITLE = 'Hacker News';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    this.route.params.subscribe(routeParams => {
+      this.currentSection = routeParams.section;
+    });
+  }
 
   /**
    * Return a User object given an username
@@ -154,8 +160,9 @@ export class HackerNewsService {
   }
 
   getNewsIDs(section = HN_SECTION[0].name): Observable<number[]> {
-    this.currentSection = HN_SECTION.filter(function(item) { return item.name === section; })[0];
-    section = this.currentSection.subpath;
+    const selectedSection = HN_SECTION.filter(function(item) { return item.name === section; })[0];
+    section = selectedSection.subpath;
+    this.currentSection = selectedSection.name;
     this.currentPosition = 0;
     return this.http.get<number[]>(this.baseApiUrl + section + '.json')
       .pipe(
@@ -181,7 +188,7 @@ export class HackerNewsService {
    * Return the name of the current selected section
    */
   getCurrentSectionName(): string{
-    return this.currentSection.name;
+    return this.currentSection;
   }
 
   /**
