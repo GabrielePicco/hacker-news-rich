@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, mergeMap, tap} from 'rxjs/operators';
@@ -8,18 +8,18 @@ import {ActivatedRoute} from "@angular/router";
 
 const mercuryHttpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
+    'Content-Type': 'application/json',
     'x-api-key': 'vNHCrF4nFnTVKD6I50YYiwZiJlVcgnDcnqwJYmjS'
   })
 };
 
 export const HN_SECTION = [
-  { name: 'Top Story', subpath: 'topstories' },
-  { name: 'New Story', subpath: 'newstories' },
-  { name: 'Best Story', subpath: 'beststories' },
-  { name: 'Show', subpath: 'showstories' },
-  { name: 'Ask', subpath: 'askstories' },
-  { name: 'Job', subpath: 'jobstories' }
+  {name: 'Top Story', subpath: 'topstories'},
+  {name: 'New Story', subpath: 'newstories'},
+  {name: 'Best Story', subpath: 'beststories'},
+  {name: 'Show', subpath: 'showstories'},
+  {name: 'Ask', subpath: 'askstories'},
+  {name: 'Job', subpath: 'jobstories'}
 ];
 
 @Injectable({
@@ -52,6 +52,28 @@ export class HackerNewsService {
     this.route.params.subscribe(routeParams => {
       this.currentSection = routeParams.section;
     });
+    const payload = {
+      'acct': 'piccogabriele',
+      'pw': '2495GAPI+',
+      'goto': 'news'
+    };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE, HEAD',
+        'Access-Control-Allow-Headers': 'X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Access-Control-Max-Age': '1728000',
+      })
+    };
+    console.log('Try login');
+    this.http.post('https://news.ycombinator.com/login', payload, httpOptions)
+      .pipe(
+        tap(
+          data => console.log(data),
+          error => console.log(error)
+        )
+      ).subscribe(result => console.log(result));
   }
 
   /**
@@ -74,7 +96,9 @@ export class HackerNewsService {
       .pipe(
         catchError(this.handleError(null)),
         mergeMap((item) => {
-          if (item.type === 'comment') { return of(item); }
+          if (item.type === 'comment') {
+            return of(item);
+          }
           return this.getEnrichedStory(item);
         })
       );
@@ -148,8 +172,12 @@ export class HackerNewsService {
    * @param mercuryStory: the mercury query result
    */
   private enrichStory(story: Story, mercuryStory) {
-    if (story == null || mercuryStory == null) { return; }
-    if (mercuryStory.lead_image_url !== null) { story.leadImageUrl = mercuryStory.lead_image_url; }
+    if (story == null || mercuryStory == null) {
+      return;
+    }
+    if (mercuryStory.lead_image_url !== null) {
+      story.leadImageUrl = mercuryStory.lead_image_url;
+    }
     story.content = mercuryStory.content;
     story.domain = mercuryStory.domain;
     story.description = mercuryStory.excerpt;
@@ -160,7 +188,9 @@ export class HackerNewsService {
   }
 
   getNewsIDs(section = HN_SECTION[0].name): Observable<number[]> {
-    const selectedSection = HN_SECTION.filter(function(item) { return item.name === section; })[0];
+    const selectedSection = HN_SECTION.filter(function (item) {
+      return item.name === section;
+    })[0];
     section = selectedSection.subpath;
     this.currentSection = selectedSection.name;
     this.currentPosition = 0;
@@ -187,7 +217,7 @@ export class HackerNewsService {
   /**
    * Return the name of the current selected section
    */
-  getCurrentSectionName(): string{
+  getCurrentSectionName(): string {
     return this.currentSection;
   }
 
@@ -197,7 +227,7 @@ export class HackerNewsService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (result?: T) {
+  private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
