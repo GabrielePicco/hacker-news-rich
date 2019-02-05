@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HackerNewsService} from '../hacker-news.service';
+import {Comment} from '../comment';
 
 @Component({
   selector: 'app-comment',

@@ -4,7 +4,8 @@ import {Observable, of} from 'rxjs';
 import {catchError, mergeMap, tap} from 'rxjs/operators';
 import {Story} from './story';
 import {User} from './user';
-import {ActivatedRoute} from "@angular/router";
+import {Comment} from './comment';
+import {ActivatedRoute} from '@angular/router';
 
 const mercuryHttpOptions = {
   headers: new HttpHeaders({

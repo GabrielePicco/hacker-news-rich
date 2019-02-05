@@ -4,7 +4,7 @@ export class Comment {
   text: string;
   parent: number;
   time: string;
-  kids: number[];
   deleted: boolean;
+  kids: number[];
   type: string;
 }
