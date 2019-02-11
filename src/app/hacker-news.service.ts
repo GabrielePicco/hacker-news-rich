@@ -53,7 +53,7 @@ export class HackerNewsService {
     this.route.params.subscribe(routeParams => {
       this.currentSection = routeParams.section;
     });
-    const payload = {
+    /*const payload = {
       'acct': 'piccogabriele',
       'pw': '2495GAPI+',
       'goto': 'news'
@@ -74,7 +74,7 @@ export class HackerNewsService {
           data => console.log(data),
           error => console.log(error)
         )
-      ).subscribe(result => console.log(result));
+      ).subscribe(result => console.log(result));*/
   }
 
   /**
@@ -188,6 +188,10 @@ export class HackerNewsService {
     story.wordCount = mercuryStory.wordCount;
   }
 
+  /**
+   * Retrieve the full list of IDs for the selected HN section
+   * @param section: the HN section
+   */
   getNewsIDs(section = HN_SECTION[0].name): Observable<number[]> {
     const selectedSection = HN_SECTION.filter(function (item) {
       return item.name === section;

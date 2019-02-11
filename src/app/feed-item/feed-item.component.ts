@@ -10,6 +10,7 @@ import {HackerNewsService} from '../hacker-news.service';
 export class FeedItemComponent implements OnInit {
 
   @Input() itemID: number;
+  @Input() showLoading: false;
   item: Story = undefined;
 
   constructor(private hackerNewsService: HackerNewsService) { }

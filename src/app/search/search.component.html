@@ -1,0 +1,37 @@
+<div class="container">
+  <div style="z-index: 5000" class="row">
+    <div class="col-12">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Search result for "{{ hackerNewsSearchService.searchTerm}}" </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="sort" (change)="onChange()" class="form-horizontal" id="Filters">
+                <fieldset>
+                  <h4 class="mb-1 no-mt">Sort by</h4>
+                  <div class="form-group no-mt">
+                    <div class="radio radio-primary">
+                      <label>
+                        <input type="radio" value="date" formControlName="by" >
+                        <span class="circle"></span><span class="check"></span> Date
+                      </label>
+                    </div>
+                    <div class="radio radio-primary">
+                      <label>
+                        <input type="radio" value="relevance" formControlName="by">
+                        <span class="circle"></span><span class="check"></span> Relevance
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-search-results></app-search-results>
+</div>

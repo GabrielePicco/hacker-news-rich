@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,10 @@ import { ProfileSidebarComponent } from './profile-sidebar/profile-sidebar.compo
 import { CommentComponent } from './comment/comment.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileActivityComponent } from './profile-activity/profile-activity.component';
+import { SearchComponent } from './search/search.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +31,16 @@ import { ProfileActivityComponent } from './profile-activity/profile-activity.co
     ProfileSidebarComponent,
     CommentComponent,
     ProfileComponent,
-    ProfileActivityComponent
+    ProfileActivityComponent,
+    SearchComponent,
+    SidebarComponent,
+    HeaderComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     InfiniteScrollModule,

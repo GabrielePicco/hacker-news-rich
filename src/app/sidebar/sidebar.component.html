@@ -1,0 +1,26 @@
+<div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar">
+  <div class="sb-slidebar-container">
+    <header class="ms-slidebar-header">
+      <!--
+      <div class="ms-slidebar-login">
+        <a href="javascript:void(0)" class="withripple"><i class="zmdi zmdi-account"></i> Login</a>
+        <a href="javascript:void(0)" class="withripple"><i class="zmdi zmdi-account-add"></i> Register</a>
+      </div>-->
+      <div class="ms-slidebar-title">
+        <form class="search-form">
+          <input id="search-box-slidebar" type="text" class="search-input" placeholder="Search..." name="query" />
+          <label for="search-box-slidebar"><i class="zmdi zmdi-search"></i></label>
+        </form>
+        <div class="ms-slidebar-t">
+          <span class="ms-logo ms-logo-sm">HN</span>
+          <h3>Hacker<span>News</span></h3>
+        </div>
+      </div>
+    </header>
+    <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
+      <li *ngFor='let s of section'>
+        <a class="link" routerLink="/feed/{{s}}"> {{s}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

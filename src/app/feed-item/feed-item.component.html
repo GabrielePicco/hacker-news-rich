@@ -1,5 +1,5 @@
 <article>
-  <div *ngIf="item !== undefined" class="card card-primary wow zoomInRight mb-4" style="visibility:hidden">
+  <div *ngIf="item !== undefined; else loading" class="card card-primary wow zoomInRight mb-4" style="visibility:hidden">
     <div class="card-body overflow-hidden card-body-big">
       <div class="row">
         <div class="col-xl-6">
@@ -29,3 +29,14 @@
     </div>
   </div>
 </article>
+
+<ng-template #loading>
+  <div *ngIf="showLoading" id="ms-preload" class="ms-preload" style="z-index: 0">
+    <div id="status">
+      <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
