@@ -46,6 +46,29 @@ export class HackerNewsSearchService {
       ).subscribe(IDs => this.searchIDs = IDs);
   }
 
+
+  /**
+   * Return 500 IDs searching with the query "Launch HN"
+   */
+  getLaunchHNStory() {
+    const options = {
+      params: new HttpParams()
+        .set('hitsPerPage', '500')
+        .set('tags', 'story')
+        .set('attributesToRetrieve', 'objectID')
+        .set('attributesToHighlight', 'none')
+        .set('page', '0')
+        .set('query', '\"Launch HN:\"')
+    };
+    return this.http.get<number[]>(this.baseApiUrl + 'search_by_date/', options)
+      .pipe(
+        catchError(this.handleError(null)),
+        mergeMap(result => {
+          return of(result.hits.map(s => parseInt(s.objectID, 10)));
+        })
+      );
+  }
+
   /**
    * Get the sort API path for the selected sorting method
    * @param sort: The sort type
@@ -53,7 +76,7 @@ export class HackerNewsSearchService {
   getSearchPath(sort: Sorting) {
     let pathSearch = 'search/';
     if (sort !== Sorting.Relevance) {
-      pathSearch = 'search_by_date';
+      pathSearch = 'search_by_date/';
     }
     return pathSearch;
   }

@@ -6,6 +6,7 @@ import {Story} from './story';
 import {User} from './user';
 import {Comment} from './comment';
 import {ActivatedRoute} from '@angular/router';
+import {HackerNewsSearchService} from "./hacker-news-search.service";
 
 const mercuryHttpOptions = {
   headers: new HttpHeaders({
@@ -20,7 +21,8 @@ export const HN_SECTION = [
   {name: 'Best Story', subpath: 'beststories'},
   {name: 'Show', subpath: 'showstories'},
   {name: 'Ask', subpath: 'askstories'},
-  {name: 'Job', subpath: 'jobstories'}
+  {name: 'Job', subpath: 'jobstories'},
+  {name: 'Launch', subpath: 'launch'}
 ];
 
 @Injectable({
@@ -49,7 +51,9 @@ export class HackerNewsService {
   private currentSection = HN_SECTION[0].name;
   TITLE = 'Hacker News';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient,
+              private route: ActivatedRoute,
+              private hackerNewsSearch: HackerNewsSearchService) {
     this.route.params.subscribe(routeParams => {
       this.currentSection = routeParams.section;
     });
@@ -199,14 +203,24 @@ export class HackerNewsService {
     section = selectedSection.subpath;
     this.currentSection = selectedSection.name;
     this.currentPosition = 0;
-    return this.http.get<number[]>(this.baseApiUrl + section + '.json')
-      .pipe(
-        catchError(this.handleError([])),
-        mergeMap(newsIDs => {
-          this.newsIDs = newsIDs;
-          return this.getNextNewsIDs();
-        })
-      );
+    if (section !== 'launch') {
+      return this.http.get<number[]>(this.baseApiUrl + section + '.json')
+        .pipe(
+          catchError(this.handleError([])),
+          mergeMap(newsIDs => {
+            this.newsIDs = newsIDs;
+            return this.getNextNewsIDs();
+          })
+        );
+    } else {
+      return this.hackerNewsSearch.getLaunchHNStory()
+        .pipe(
+          mergeMap(newsIDs => {
+            this.newsIDs = newsIDs;
+            return this.getNextNewsIDs();
+          })
+        );
+    }
   }
 
   /**
