@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {DOCUMENT, Location} from '@angular/common';
+import {Location} from '@angular/common';
 import {HackerNewsSearchService} from '../hacker-news-search.service';
 import {NgForm} from '@angular/forms';
 
@@ -13,8 +13,7 @@ export class HeaderComponent implements OnInit {
 
   constructor( private router: Router,
                private location: Location,
-               private hackerNewsSearchService: HackerNewsSearchService,
-               @Inject(DOCUMENT) private document) { }
+               private hackerNewsSearchService: HackerNewsSearchService) { }
 
   ngOnInit() {
   }
@@ -28,7 +27,6 @@ export class HeaderComponent implements OnInit {
 
   onSearchSubmit(form: NgForm) {
     this.hackerNewsSearchService.searchStory(form.value.query);
-    this.document.activeElement.blur();
   }
 
 }

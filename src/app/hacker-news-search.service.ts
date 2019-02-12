@@ -25,7 +25,7 @@ export class HackerNewsSearchService {
    * @param query: the string query
    * @param sort: type of sorting (relevance | date)
    */
-  searchStory(query: string, sort = Sorting.Relevance) {
+  searchStory(query: string, sort = Sorting.Date) {
     const options = {
       params: new HttpParams()
         .set('hitsPerPage', this.initialNStory.toString())

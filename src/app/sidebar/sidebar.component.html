@@ -7,9 +7,10 @@
         <a href="javascript:void(0)" class="withripple"><i class="zmdi zmdi-account-add"></i> Register</a>
       </div>-->
       <div class="ms-slidebar-title">
-        <form class="search-form">
-          <input id="search-box-slidebar" type="text" class="search-input" placeholder="Search..." name="query" />
+        <form #f="ngForm" (ngSubmit)="onSearchSubmit(f)" class="search-form">
+          <input (click)="$event.target.value = ''" (input)="onSearchChange($event.target.value)" ngModel id="search-box-slidebar" type="text" class="search-input" placeholder="Search..." name="query" required />
           <label for="search-box-slidebar"><i class="zmdi zmdi-search"></i></label>
+          <button type="submit" style="visibility: hidden" class="ms-toggle-left"></button>
         </form>
         <div class="ms-slidebar-t">
           <span class="ms-logo ms-logo-sm">HN</span>
@@ -19,7 +20,7 @@
     </header>
     <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
       <li *ngFor='let s of section'>
-        <a class="link" routerLink="/feed/{{s}}"> {{s}}</a>
+        <a class="link ms-toggle-left" routerLink="/feed/{{s}}"> {{s}}</a>
       </li>
     </ul>
   </div>
