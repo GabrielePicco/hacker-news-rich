@@ -20,6 +20,7 @@ import { SearchComponent } from './search/search.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { ShareModule } from '@ngx-share/core';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SearchResultsComponent } from './search-results/search-results.componen
     AppRoutingModule,
     HttpClientModule,
     InfiniteScrollModule,
-    EmojifyModule
+    EmojifyModule,
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]

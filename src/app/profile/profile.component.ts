@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onScroll() {
-    this.startIndex += this.pageSize;
     this.current.activities = this.current.activities.concat(this.user.submitted.slice(this.startIndex, this.startIndex + this.pageSize));
+    this.startIndex += this.pageSize;
   }
 }

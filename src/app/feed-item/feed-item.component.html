@@ -3,12 +3,12 @@
     <div class="card-body overflow-hidden card-body-big">
       <div class="row">
         <div class="col-xl-6">
-          <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}">
+          <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" >
             <img [src]="item.leadImageUrl" alt="" class="img-fluid mb-4">
           </a>
         </div>
         <div class="col-xl-6 mb-4">
-          <h3 class="no-mt"><a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}">{{item.title}}</a></h3>
+          <h3 class="no-mt"><a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" >{{item.title}}</a></h3>
           <h5>{{item.domain}}
             <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }} points</span></span></a>
             <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }} comments</span></span></a>
@@ -23,7 +23,7 @@
           <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'h:mm'}}</span></span>
         </div>
         <div class="col-lg-4 text-right">
-          <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+          <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
         </div>
       </div>
     </div>

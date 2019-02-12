@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Location} from '@angular/common';
+import {DOCUMENT, Location} from '@angular/common';
 import {HackerNewsSearchService} from '../hacker-news-search.service';
 import {NgForm} from '@angular/forms';
 
@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
 
   constructor( private router: Router,
                private location: Location,
-               private hackerNewsSearchService: HackerNewsSearchService) { }
+               private hackerNewsSearchService: HackerNewsSearchService,
+               @Inject(DOCUMENT) public document: Document) { }
 
   ngOnInit() {
   }
