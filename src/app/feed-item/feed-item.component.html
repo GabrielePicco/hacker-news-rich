@@ -9,9 +9,10 @@
         </div>
         <div class="col-xl-6 mb-4">
           <h3 class="no-mt"><a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" >{{item.title}}</a></h3>
-          <h5>{{item.domain}}
-            <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }} points</span></span></a>
-            <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }} comments</span></span></a>
+          <h5>
+            <span class="d-none d-sm-inline">{{item.domain}}</span>
+            <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }} points</span></span></a>
+            <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }} comments</span></span></a>
           </h5>
           <p [innerHTML]="((item.description !== undefined && item.description.length > 400 ? (item.description | slice:0:300) + '...' : item.description) | emojify)"></p>
         </div>
@@ -19,7 +20,7 @@
       <div class="row">
         <div class="col-lg-8">
           By <a href="profile/{{ item.by }}">{{item.by}}</a>
-          <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
+          <span class="ml-1 d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
           <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'h:mm'}}</span></span>
         </div>
         <div class="col-lg-4 text-right">

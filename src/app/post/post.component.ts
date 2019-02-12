@@ -11,8 +11,11 @@ import {Title} from '@angular/platform-browser';
 })
 export class PostComponent implements OnInit {
 
-  private id: number;
+  post = {comments : []};
   item: Story;
+  private id: number;
+  private startIndex = 0;
+  private pageSize = 3;
 
   constructor(private titleService: Title, private route: ActivatedRoute, private hackerNewsService: HackerNewsService) { }
 
@@ -21,7 +24,12 @@ export class PostComponent implements OnInit {
     this.hackerNewsService.getEnrichedStoryByID(this.id).subscribe(item => {
       this.item = item;
       this.titleService.setTitle(item.title);
+      this.onScroll();
     });
   }
 
+  onScroll() {
+    this.post.comments = this.post.comments.concat(this.item.kids.slice(this.startIndex, this.startIndex + this.pageSize));
+    this.startIndex += this.pageSize;
+  }
 }
