@@ -6,7 +6,7 @@ import {Story} from './story';
 import {User} from './user';
 import {Comment} from './comment';
 import {ActivatedRoute} from '@angular/router';
-import {HackerNewsSearchService} from "./hacker-news-search.service";
+import {HackerNewsSearchService} from './hacker-news-search.service';
 
 const mercuryHttpOptions = {
   headers: new HttpHeaders({
@@ -57,28 +57,25 @@ export class HackerNewsService {
     this.route.params.subscribe(routeParams => {
       this.currentSection = routeParams.section;
     });
-    /*const payload = {
+    const payload = {
       'acct': 'piccogabriele',
       'pw': '2495GAPI+',
       'goto': 'news'
     };
+    const body = 'acct=piccogabriele&pw=2495GAPI+&goto=news';
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE, HEAD',
-        'Access-Control-Allow-Headers': 'X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept',
-        'Access-Control-Allow-Access-Control-Max-Age': '1728000',
-      })
+      'headers': {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     };
     console.log('Try login');
-    this.http.post('https://news.ycombinator.com/login', payload, httpOptions)
+    this.http.post('https://news.ycombinator.com/login', body, httpOptions)
       .pipe(
         tap(
           data => console.log(data),
           error => console.log(error)
         )
-      ).subscribe(result => console.log(result));*/
+      ).subscribe(result => console.log(result));
   }
 
   /**
