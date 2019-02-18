@@ -1,0 +1,9 @@
+{
+  "/api/user/login": {
+    "target": "https://news.ycombinator.com:80/login",
+    "secure": false,
+    "protocol": "https:",
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
