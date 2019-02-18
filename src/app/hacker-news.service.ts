@@ -72,7 +72,7 @@ export class HackerNewsService {
     this.http.post('/hackernews/login', body, httpOptions)
       .pipe(
         tap(
-          data => console.log(data),
+          data => console.log(data.text),
           error => console.log(error)
         )
       ).subscribe(result => console.log(result));
