@@ -69,7 +69,7 @@ export class HackerNewsService {
       }
     };
     console.log('Try login');
-    this.http.post('https://news.ycombinator.com/login', body, httpOptions)
+    this.http.post('/hackernews/login', body, httpOptions)
       .pipe(
         tap(
           data => console.log(data),
