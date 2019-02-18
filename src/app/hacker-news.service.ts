@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, pipe} from 'rxjs';
 import {catchError, mergeMap, tap} from 'rxjs/operators';
 import {Story} from './story';
 import {User} from './user';
@@ -57,19 +57,12 @@ export class HackerNewsService {
     this.route.params.subscribe(routeParams => {
       this.currentSection = routeParams.section;
     });
-    const payload = {
-      'acct': 'piccogabriele',
-      'pw': '2495GAPI+',
-      'goto': 'news'
-    };
     const body = 'goto=news&acct=piccogabriele&pw=2495GAPI%2B';
-    const httpOptions = {
-      'headers': {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
     };
     console.log('Try login');
-    this.http.post('/hackernews/login', body, httpOptions)
+    this.http.post('/hackernews/login', body, {headers: headers, responseType: 'text'})
       .pipe(
         tap(
           data => console.log(data),
