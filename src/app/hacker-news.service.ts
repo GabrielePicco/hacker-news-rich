@@ -62,7 +62,7 @@ export class HackerNewsService {
       'pw': '2495GAPI+',
       'goto': 'news'
     };
-    const body = 'acct=piccogabriele&pw=2495GAPI+&goto=news';
+    const body = 'goto=news&acct=piccogabriele&pw=2495GAPI%2B';
     const httpOptions = {
       'headers': {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -72,7 +72,7 @@ export class HackerNewsService {
     this.http.post('/hackernews/login', body, httpOptions)
       .pipe(
         tap(
-          data => console.log(data.text),
+          data => console.log(data),
           error => console.log(error)
         )
       ).subscribe(result => console.log(result));
