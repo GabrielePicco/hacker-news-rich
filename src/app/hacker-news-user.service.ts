@@ -10,7 +10,7 @@ import {Observable, of} from 'rxjs';
 export class HackerNewsUserService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    const body = 'goto=news&acct=piccogabriele&pw=2495GAPI%2B';
+    const body = 'goto=news&acct=piccogabriele&pw=2495GAPIe%2B';
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
@@ -23,6 +23,7 @@ export class HackerNewsUserService {
         } else {
           console.log('login incorrect !');
         }
+        console.log(cookieService.getAll());
         console.log(result);
       });
   }
