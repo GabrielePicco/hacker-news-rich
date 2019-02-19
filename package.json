@@ -24,6 +24,7 @@
     "angular-emojify": "^1.0.0",
     "component": "^1.1.0",
     "core-js": "^2.5.4",
+    "ngx-cookie-service": "^2.1.0",
     "ngx-infinite-scroll": "^7.0.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

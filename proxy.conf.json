@@ -1,9 +1,13 @@
 {
-  "/api/user/login": {
-    "target": "https://news.ycombinator.com:80/login",
+  "/hackernews/*": {
+    "target":  {
+      "host": "news.ycombinator.com",
+      "protocol": "https:",
+      "port": 443
+    },
     "secure": false,
-    "protocol": "https:",
-    "logLevel": "debug",
-    "changeOrigin": true
+    "logLevel": "info",
+    "changeOrigin": true,
+    "pathRewrite": {"^/hackernews" : ""}
   }
 }

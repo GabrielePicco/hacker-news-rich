@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {DOCUMENT, Location} from '@angular/common';
 import {HackerNewsSearchService} from '../hacker-news-search.service';
 import {NgForm} from '@angular/forms';
+import {HackerNewsUserService} from '../hacker-news-user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor( private router: Router,
                private location: Location,
                private hackerNewsSearchService: HackerNewsSearchService,
+               private hna: HackerNewsUserService,
                @Inject(DOCUMENT) public document: Document) { }
 
   ngOnInit() {

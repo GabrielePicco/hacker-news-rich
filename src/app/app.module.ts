@@ -21,6 +21,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { ShareModule } from '@ngx-share/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { ShareModule } from '@ngx-share/core';
     EmojifyModule,
     ShareModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
