@@ -22,6 +22,7 @@ import { HeaderComponent } from './header/header.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { ShareModule } from '@ngx-share/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ModalUserComponent } from './modal-user/modal-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CookieService } from 'ngx-cookie-service';
     SearchComponent,
     SidebarComponent,
     HeaderComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ModalUserComponent
   ],
   imports: [
     BrowserModule,

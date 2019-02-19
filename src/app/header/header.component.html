@@ -17,9 +17,7 @@
         </ul>
         <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7"><i class="zmdi zmdi-share"></i></a>
       </div>
-      <!--
       <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
-      -->
       <form #f="ngForm" (ngSubmit)="onSearchSubmit(f)" class="search-form animated zoomInDown animation-delay-9" novalidate>
         <input (click)="$event.target.value = ''" (input)="onSearchChange($event.target.value)" id="search-box" ngModel type="text" class="search-input" placeholder="Search..." name="query" required />
         <label for="search-box"><i class="zmdi zmdi-search"></i></label>
