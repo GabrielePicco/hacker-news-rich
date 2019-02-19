@@ -18,14 +18,15 @@ export class HackerNewsUserService {
     this.http.post('/hackernews/login', body, {headers: headers, responseType: 'text', withCredentials: true})
       .pipe(catchError(this.handleError(null)))
       .subscribe(result => {
-        if (this.cookieService.check('user')) {
-          console.log('login correct');
+        if (result.length < 1300 && result.indexOf('Bad login.') !== -1) {
+          console.log('login incorrect');
         } else {
-          console.log('login incorrect !');
+          console.log('login correct !');
         }
-        this.cookieService.set( 'user', 'Hello World' );
+        this.cookieService.set( 'userinfo', 'Hello World' );
         console.log(cookieService.getAll());
         console.log(result);
+        console.log(result.length);
       });
   }
 
