@@ -15,7 +15,7 @@ export class HackerNewsUserService {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
     console.log('Try login');
-    this.http.post('/hackernews/login', body, {headers: headers, responseType: 'text'})
+    this.http.post('/hackernews/login', body, {headers: headers, responseType: 'text', withCredentials: true})
       .pipe(catchError(this.handleError(null)))
       .subscribe(result => {
         if (this.cookieService.check('user')) {
@@ -23,7 +23,7 @@ export class HackerNewsUserService {
         } else {
           console.log('login incorrect !');
         }
-        this.cookieService.set( 'Test', 'Hello World' );
+        this.cookieService.set( 'user', 'Hello World' );
         console.log(cookieService.getAll());
         console.log(result);
       });
