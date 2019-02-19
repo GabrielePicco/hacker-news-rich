@@ -17,6 +17,16 @@
         </ul>
         <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7"><i class="zmdi zmdi-share"></i></a>
       </div>
+      <div class="btn-group">
+        <button type="button" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="zmdi zmdi-account"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
+          <li role="separator" class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="javascript:void(0)">Logout</a></li>
+        </ul>
+      </div>
       <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
       <form #f="ngForm" (ngSubmit)="onSearchSubmit(f)" class="search-form animated zoomInDown animation-delay-9" novalidate>
         <input (click)="$event.target.value = ''" (input)="onSearchChange($event.target.value)" id="search-box" ngModel type="text" class="search-input" placeholder="Search..." name="query" required />
