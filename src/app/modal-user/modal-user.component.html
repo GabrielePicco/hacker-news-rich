@@ -2,7 +2,7 @@
   <div class="modal-dialog animated zoomIn animated-3x" role="document">
     <div class="modal-content">
       <div class="modal-header d-block shadow-2dp no-pb">
-        <button type="button" class="close d-inline pull-right mt-2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+        <button type="button" class="close d-inline pull-right mt-2" data-dismiss="modal" aria-label="Close" #closeAccountDialog><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
         <div class="modal-title text-center">
           <span class="ms-logo ms-logo-white ms-logo-sm mr-1">HN</span>
           <h3 class="no-m ms-site-title">Hacker<span>News</span></h3>
@@ -15,9 +15,13 @@
         </div>
       </div>
       <div class="modal-body">
+        <div *ngIf="error.title.length > 0" class="alert alert-danger alert-light alert-dismissible wow slideInDown" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="zmdi zmdi-close"></i></button>
+          <strong><i class="zmdi zmdi-close-circle"></i> {{ error.title }}</strong> {{ error.desc }}
+        </div>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade active show" id="ms-login-tab">
-            <form #login="ngForm" (ngSubmit)="onLogin(login)" autocomplete="off">
+            <form #login="ngForm" (ngSubmit)="onSubmit(login)" autocomplete="off">
               <fieldset>
                 <div class="form-group label-floating">
                   <div class="input-group">
@@ -36,37 +40,30 @@
                 <div class="row mt-2">
                   <div class="col-md-6"></div>
                   <div class=" col-md-6">
-                    <button [class.disabled]="!login.valid" class="btn btn-raised btn-primary pull-right" type="submit">Login</button>
+                    <button [class.disabled]="!login.valid" class="btn btn-raised btn-primary pull-right" data-dismiss="modal" type="submit">Login</button>
                   </div>
                 </div>
               </fieldset>
             </form>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="ms-register-tab">
-            <form>
+            <form #register="ngForm" (ngSubmit)="onSubmit(register, true)">
               <fieldset>
                 <div class="form-group label-floating">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                     <label class="control-label" for="ms-form-user-r">Username</label>
-                    <input type="text" id="ms-form-user-r" class="form-control">
+                    <input ngModel name="username" type="text" id="ms-form-user-r" class="form-control" required>
                   </div>
                 </div>
                 <div class="form-group label-floating">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
                     <label class="control-label" for="ms-form-pass-r">Password</label>
-                    <input type="password" id="ms-form-pass-r" class="form-control">
+                    <input ngModel name="password" type="password" id="ms-form-pass-r" class="form-control" required>
                   </div>
                 </div>
-                <div class="form-group label-floating">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
-                    <label class="control-label" for="ms-form-pass-rn">Re-type Password</label>
-                    <input type="password" id="ms-form-pass-rn" class="form-control">
-                  </div>
-                </div>
-                <button class="btn btn-raised btn-block btn-primary">Register Now</button>
+                <button class="btn btn-raised btn-block btn-primary" type="submit">Register Now</button>
               </fieldset>
             </form>
           </div>

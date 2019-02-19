@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {HackerNewsUserService} from '../hacker-news-user.service';
 import {Login} from '../login.enum';
@@ -10,19 +10,24 @@ import {Login} from '../login.enum';
 })
 export class ModalUserComponent implements OnInit {
 
+  @ViewChild('closeAccountDialog') closeBtn: ElementRef;
+
+  error = {'title': '', 'desc': ''};
+
   constructor(private hackerNewsAccount: HackerNewsUserService) { }
 
   ngOnInit() {
   }
 
-  onLogin(login: NgForm) {
-    if (login.valid) {
-      this.hackerNewsAccount.login(login.value.username, login.value.password)
+  onSubmit(form: NgForm, register: boolean) {
+    if (form.valid) {
+      this.hackerNewsAccount.login(form.value.username, form.value.password, register)
         .subscribe(res => {
           if (res === Login.Ok) {
-            alert('Login correct');
+            this.closeBtn.nativeElement.click();
           } else {
-            alert('login not correct !');
+            this.error.title = 'Bad login !';
+            this.error.desc = 'Wrong username or password';
           }
         });
     }

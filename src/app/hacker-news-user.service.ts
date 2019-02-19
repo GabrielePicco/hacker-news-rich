@@ -27,7 +27,8 @@ export class HackerNewsUserService {
       .pipe(
         catchError(this.handleError(null)),
         mergeMap((result: string) => {
-          if (result.length < 1300 && result.indexOf('Bad login.') !== -1) {
+          console.log(result);
+          if (result.length < 2000) {
             return of(Login.Wrong);
           } else {
             this.cookieService.set( 'userinfo', `${username}&${password}`, 2000 );
