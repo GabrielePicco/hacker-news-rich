@@ -16,7 +16,6 @@
       </div>
       <div class="modal-body">
         <div *ngIf="error.title.length > 0" class="alert alert-danger alert-light alert-dismissible wow slideInDown" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="zmdi zmdi-close"></i></button>
           <strong><i class="zmdi zmdi-close-circle"></i> {{ error.title }}</strong> {{ error.desc }}
         </div>
         <div class="tab-content">
@@ -40,7 +39,7 @@
                 <div class="row mt-2">
                   <div class="col-md-6"></div>
                   <div class=" col-md-6">
-                    <button [class.disabled]="!login.valid" class="btn btn-raised btn-primary pull-right" data-dismiss="modal" type="submit">Login</button>
+                    <button [class.disabled]="!login.valid" class="btn btn-raised btn-primary pull-right" type="submit">Login</button>
                   </div>
                 </div>
               </fieldset>
@@ -63,7 +62,7 @@
                     <input ngModel name="password" type="password" id="ms-form-pass-r" class="form-control" required>
                   </div>
                 </div>
-                <button class="btn btn-raised btn-block btn-primary" type="submit">Register Now</button>
+                <button [class.disabled]="!register.valid" class="btn btn-raised btn-block btn-primary" type="submit">Register Now</button>
               </fieldset>
             </form>
           </div>

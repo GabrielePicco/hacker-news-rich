@@ -25,6 +25,7 @@ export class ModalUserComponent implements OnInit {
         .subscribe(res => {
           if (res === Login.Ok) {
             this.closeBtn.nativeElement.click();
+            alert('correct login');
           } else {
             this.error.title = 'Bad login !';
             this.error.desc = 'Wrong username or password';
