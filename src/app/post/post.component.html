@@ -6,7 +6,7 @@
           <h1 class="no-mt"><a *ngIf="item.url != undefined" [href]="item.url">{{ item.title }}</a><span class="primary-color" *ngIf="item.url == undefined"> {{ item.title }} </span></h1>
           <div class="mb-4">
             <span class="d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
-            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'h:mm'}}</span></span>
+            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'H:mm'}}</span></span>
             <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }}</span></span>
             <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }}</span></span>
             <span class="ml-1">{{ item.domain }}</span>
@@ -14,7 +14,6 @@
           <img [src]="item.leadImageUrl" class="img-fluid mb-4">
           <p [innerHTML]="item.text"></p>
           <a *ngIf="item.url != undefined" [href]="item.url" target="_blank" class="btn btn-primary btn-raised btn-block animate-icon">Read the original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
-          <!-- <a [href]="item.url" class="btn btn-primary btn-raised btn-block"><i class="mr-1 no-mr zmdi zmdi-comments"></i>Add Comment</a> -->
         </div>
       </div>
     </div>
@@ -25,48 +24,33 @@
   <div class="row wow materialUp animation-delay-8">
     <div class="col-md-12">
       <h2 class="color-primary right-line">Comments</h2>
+      <div *ngIf="hackerNewsUserService.isAuthenticated && replyComment == undefined" class="card card-primary">
+        <div class="card-body">
+          <textarea [(ngModel)]="replyText" style="border: none; outline: none;-webkit-box-shadow: none;-moz-box-shadow: none;box-shadow: none;" class="form-control" rows="2" id="textArea"></textarea>
+        </div>
+        <div style="background: whitesmoke;" class="card-footer">
+          <a (click)="addComment(item.id.toString(), replyText)" class="btn btn-primary btn-raised" > Add comment </a>
+        </div>
+      </div>
       <ul class="ms-timeline">
+        <li *ngIf="replyComment != undefined" class="ms-timeline-item wow fadeInRight">
+          <div class="ms-timeline-date">
+            <i class="ms-timeline-point bg-primary"></i>
+          </div>
+          <div class="card card-primary">
+            <div style="background: whitesmoke;" class="card-header">
+              <h3 style="color: gray" class="card-title">By <a href="/profile/{{ replyComment.by }}" > {{ replyComment.by }} </a>
+                <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ replyComment.time | date: 'yyyy-MM-dd'}}</span></span>
+                <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ replyComment.time | date: 'H:mm'}}</span></span>
+              </h3>
+            </div>
+            <div class="card-body">
+              <p [innerHTML]="replyComment.text"></p>
+            </div>
+          </div>
+        </li>
         <app-comment *ngFor='let id of post.comments' [id]="id"></app-comment>
       </ul>
     </div>
   </div>
-  <!--
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card card-primary animated fadeInUp animation-delay-8">
-        <div class="card-body">
-          <h2 class="color-primary text-center">Leave a comment</h2>
-          <form class="form-horizontal">
-            <fieldset class="container">
-              <div class="form-group row">
-                <label for="inputEmail" autocomplete="false" class="col-lg-2 control-label">Name</label>
-                <div class="col-lg-9">
-                  <input type="text" class="form-control" id="inputName" placeholder="Name">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputEmail" autocomplete="false" class="col-lg-2 control-label">Email</label>
-                <div class="col-lg-9">
-                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="textArea" class="col-lg-2 control-label">Comment</label>
-                <div class="col-lg-9">
-                  <textarea class="form-control" rows="6" id="textArea" placeholder="Your comment..."></textarea>
-                </div>
-              </div>
-              <div class="form-group row justify-content-end">
-                <div class="col-lg-10">
-                  <button type="submit" class="btn btn-raised btn-primary">Send Comment</button>
-                  <button type="button" class="btn btn-danger">Cancel</button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  -->
 </div>

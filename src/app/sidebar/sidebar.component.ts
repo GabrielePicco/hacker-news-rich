@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DOCUMENT, Location} from '@angular/common';
 import {HackerNewsSearchService} from '../hacker-news-search.service';
+import {HackerNewsUserService} from '../hacker-news-user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +17,7 @@ export class SidebarComponent implements OnInit {
   constructor( private router: Router,
                private location: Location,
                private hackerNewsSearchService: HackerNewsSearchService,
+               public hackerNewsUserService: HackerNewsUserService,
                @Inject(DOCUMENT) private document) { }
 
   ngOnInit() {

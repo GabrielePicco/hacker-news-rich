@@ -1,8 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {DOCUMENT, Location} from '@angular/common';
 import {HackerNewsSearchService} from '../hacker-news-search.service';
 import {NgForm} from '@angular/forms';
+import {HackerNewsUserService} from '../hacker-news-user.service';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,12 @@ import {NgForm} from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
 
+  @ViewChild('header') header: ElementRef;
+
   constructor( private router: Router,
                private location: Location,
                private hackerNewsSearchService: HackerNewsSearchService,
+               public hackerNewsUserService: HackerNewsUserService,
                @Inject(DOCUMENT) public document: Document) { }
 
   ngOnInit() {
@@ -30,4 +34,8 @@ export class HeaderComponent implements OnInit {
     this.hackerNewsSearchService.searchStory(form.value.query);
   }
 
+  logout() {
+    this.header.nativeElement.click();
+    this.hackerNewsUserService.logout();
+  }
 }

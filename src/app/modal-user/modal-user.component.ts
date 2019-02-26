@@ -13,6 +13,7 @@ export class ModalUserComponent implements OnInit {
   @ViewChild('closeAccountDialog') closeBtn: ElementRef;
 
   error = {'title': '', 'desc': ''};
+  loading = false;
 
   constructor(private hackerNewsAccount: HackerNewsUserService) { }
 
@@ -21,11 +22,16 @@ export class ModalUserComponent implements OnInit {
 
   onSubmit(form: NgForm, register: boolean) {
     if (form.valid) {
+      this.error.title = '';
+      this.loading = true;
       this.hackerNewsAccount.login(form.value.username, form.value.password, register)
         .subscribe(res => {
+          this.loading = false;
           if (res === Login.Ok) {
             this.closeBtn.nativeElement.click();
-            alert('correct login');
+          } else if (res === Login.UserAlreadyExist) {
+            this.error.title = 'Error !';
+            this.error.desc = 'That username is taken. Please choose another.';
           } else {
             this.error.title = 'Bad login !';
             this.error.desc = 'Wrong username or password';

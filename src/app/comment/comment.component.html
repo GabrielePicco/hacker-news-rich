@@ -6,17 +6,46 @@
     <div style="background: whitesmoke;" class="card-header">
       <h3 style="color: gray" class="card-title">By <a href="/profile/{{ comment.by }}" > {{ comment.by }} </a>
         <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ comment.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
-        <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ comment.time * 1000 | date: 'h:mm'}}</span></span>
+        <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ comment.time * 1000 | date: 'H:mm'}}</span></span>
       </h3>
     </div>
     <div class="card-body">
       <p [innerHTML]="comment.text"></p>
+      <a *ngIf="hackerNewsUserService.isAuthenticated" (click)="showReply = true" href="javascipt:void(0)"> reply </a>
     </div>
   </div>
-  <div *ngIf="comment.kids != undefined" class="row">
+
+  <div *ngIf="showReply" class="card card-primary">
+    <div class="card-body">
+      <textarea [(ngModel)]="replyText" style="border: none; outline: none;-webkit-box-shadow: none;-moz-box-shadow: none;box-shadow: none;" class="form-control" rows="4" id="textArea"></textarea>
+    </div>
+    <div style="background: whitesmoke;" class="card-footer">
+      <a (click)="addComment(comment.id, replyText)" class="btn btn-primary btn-raised" > Add comment </a>
+    </div>
+  </div>
+
+  <div *ngIf="comment.kids != undefined || replyComment != undefined" class="row">
     <div class="col-md-12">
       <ul class="ms-timeline">
-        <app-comment *ngFor='let id of comment.kids' [id]="id"></app-comment>
+        <li *ngIf="replyComment != undefined" class="ms-timeline-item wow fadeInRight">
+          <div class="ms-timeline-date">
+            <i class="ms-timeline-point bg-primary"></i>
+          </div>
+          <div class="card card-primary">
+            <div style="background: whitesmoke;" class="card-header">
+              <h3 style="color: gray" class="card-title">By <a href="/profile/{{ replyComment.by }}" > {{ replyComment.by }} </a>
+                <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ replyComment.time | date: 'yyyy-MM-dd'}}</span></span>
+                <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ replyComment.time | date: 'H:mm'}}</span></span>
+              </h3>
+            </div>
+            <div class="card-body">
+              <p [innerHTML]="replyComment.text"></p>
+            </div>
+          </div>
+        </li>
+        <div *ngIf="comment.kids != undefined">
+          <app-comment *ngFor='let id of comment.kids' [id]="id"></app-comment>
+        </div>
       </ul>
     </div>
   </div>

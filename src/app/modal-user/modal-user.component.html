@@ -15,6 +15,9 @@
         </div>
       </div>
       <div class="modal-body">
+        <div *ngIf="loading" class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
         <div *ngIf="error.title.length > 0" class="alert alert-danger alert-light alert-dismissible wow slideInDown" role="alert">
           <strong><i class="zmdi zmdi-close-circle"></i> {{ error.title }}</strong> {{ error.desc }}
         </div>

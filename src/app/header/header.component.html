@@ -1,4 +1,4 @@
-<header class="ms-header ms-header-primary">
+<header class="ms-header ms-header-primary" style="z-index: 1171" #header>
   <!--ms-header-primary-->
   <div class="container container-full">
     <div class="ms-title">
@@ -18,15 +18,15 @@
           </ul>
           <a href="javascript:void(0)" class="btn-circle btn-circle-primary animated zoomInDown animation-delay-7"><i class="zmdi zmdi-share"></i></a>
         </div>
-        <button type="button" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button *ngIf="hackerNewsUserService.isAuthenticated" type="button" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="zmdi zmdi-account"></i>
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="javascript:void(0)">Profile</a></li>
+          <li><a [routerLink]="'/profile/' + hackerNewsUserService.username" class="dropdown-item"> Profile </a></li>
           <li role="separator" class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="javascript:void(0)">Logout</a></li>
+          <li><a (click)="logout()" class="dropdown-item">Logout</a></li>
         </ul>
-        <a href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
+        <a *ngIf="!hackerNewsUserService.isAuthenticated" href="javascript:void(0)" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8" data-toggle="modal" data-target="#ms-account-modal"><i class="zmdi zmdi-account"></i></a>
         <form #f="ngForm" (ngSubmit)="onSearchSubmit(f)" class="search-form animated zoomInDown animation-delay-9" novalidate>
           <input (click)="$event.target.value = ''" (input)="onSearchChange($event.target.value)" id="search-box" ngModel type="text" class="search-input" placeholder="Search..." name="query" required />
           <label for="search-box"><i class="zmdi zmdi-search"></i></label>
