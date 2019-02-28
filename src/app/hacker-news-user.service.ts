@@ -84,6 +84,25 @@ export class HackerNewsUserService {
     ).subscribe();
   }
 
+  vote(itemId: string, how: string) {
+    const body = new URLSearchParams();
+    const credentials = this.getCredentials();
+    body.set('acct', credentials.username);
+    body.set('pw', credentials.password);
+    body.set('id', itemId);
+    body.set('how', how);
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    return this.http.post('/hackernews/vote', body.toString(), {
+      headers: headers,
+      responseType: 'text',
+      withCredentials: true
+    }).pipe(
+      catchError(this.handleError(null))
+    ).subscribe();
+  }
+
 
   /**
    * Get the credentials from the cookies
@@ -96,7 +115,6 @@ export class HackerNewsUserService {
       const field = this.cookieService.get('userinfo').split('&');
       credentials.username = field[0];
       credentials.password = CryptoJS.AES.decrypt(field[1], credentials.username).toString(CryptoJS.enc.Utf8);
-      console.log(credentials);
       return credentials;
     }
   }

@@ -1,4 +1,10 @@
 <article>
+  <a (click)="vote(item.id.toString())" *ngIf="item !== undefined && hackerNewsUserService.isAuthenticated && direction == 'up';" data-placement="right" data-toggle="tooltip" title="Upvote" class="btn-circle btn-circle-lg btn-circle-white color-primary btn-circle-raised btn-card-float ml-4 mt-3 wow zoomInDown" style="left:0%">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <a (click)="vote(item.id.toString())" *ngIf="item !== undefined && hackerNewsUserService.isAuthenticated && direction == 'un';" data-placement="right" data-toggle="tooltip" title="Upvote" class="btn-circle btn-circle-lg btn-circle-white color-medium btn-circle-raised btn-card-float ml-4 mt-3 wow zoomInDown" style="left:0%">
+    <span class="glyphicon glyphicon-chevron-down"></span>
+  </a>
   <div *ngIf="item !== undefined; else loading" class="card card-primary wow zoomInRight mb-4" style="visibility:hidden">
     <div class="card-body overflow-hidden card-body-big">
       <div class="row">

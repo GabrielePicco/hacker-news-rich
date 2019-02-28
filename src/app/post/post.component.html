@@ -1,9 +1,9 @@
-<div *ngIf="item != undefined" class="container">
+<div *ngIf="item != undefined" class="container" infiniteScroll (scrolled)="onScroll()">
   <div class="row">
     <div class="col-lg-8">
       <div class="card animated fadeInLeftTiny animation-delay-5">
         <div class="card-body card-body-big">
-          <h1 class="no-mt"><a *ngIf="item.url != undefined" [href]="item.url">{{ item.title }}</a><span class="primary-color" *ngIf="item.url == undefined"> {{ item.title }} </span></h1>
+          <h1 class="no-mt"><app-vote-button [itemId]="item.id"></app-vote-button><a *ngIf="item.url != undefined" [href]="item.url" target="_blank">{{ item.title }}</a><span class="primary-color" *ngIf="item.url == undefined"> {{ item.title }} </span></h1>
           <div class="mb-4">
             <span class="d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
             <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'H:mm'}}</span></span>

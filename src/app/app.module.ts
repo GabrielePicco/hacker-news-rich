@@ -23,6 +23,7 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { ShareModule } from '@ngx-share/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalUserComponent } from './modal-user/modal-user.component';
+import { VoteButtonComponent } from './vote-button/vote-button.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ModalUserComponent } from './modal-user/modal-user.component';
     SidebarComponent,
     HeaderComponent,
     SearchResultsComponent,
-    ModalUserComponent
+    ModalUserComponent,
+    VoteButtonComponent
   ],
   imports: [
     BrowserModule,

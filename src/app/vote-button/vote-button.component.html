@@ -1,0 +1,2 @@
+<span *ngIf="hackerNewsUserService.isAuthenticated && direction == 'up'" (click)="vote()" class="color-primary glyphicon glyphicon-chevron-up animated zoomInDown mr-1 ml-0" data-placement="top" data-toggle="tooltip" title="Upvote"></span>
+<span *ngIf="hackerNewsUserService.isAuthenticated && direction == 'un'" (click)="vote()" class="color-medium glyphicon glyphicon-chevron-down animated zoomInDown mr-1 ml-0" data-placement="top" data-toggle="tooltip" title="Downvote"></span>
