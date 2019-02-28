@@ -1,4 +1,4 @@
-<div *ngIf="item != undefined" class="container" infiniteScroll (scrolled)="onScroll()">
+<div *ngIf="item != undefined; else loading" class="container" infiniteScroll (scrolled)="onScroll()">
   <div class="row">
     <div class="col-lg-8">
       <div class="card animated fadeInLeftTiny animation-delay-5">
@@ -54,3 +54,14 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div style="z-index: 0; margin-top: 25%" class="absolute-center">
+    <div id="status">
+      <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
