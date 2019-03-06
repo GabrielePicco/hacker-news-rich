@@ -110,7 +110,12 @@ export class HackerNewsUserService {
     ).subscribe();
   }
 
-
+  /**
+   * Submit a new story or link
+   * @param title: the title
+   * @param content: the url or text
+   * @param isUrl: default True
+   */
   submit(title: string, content: string, isUrl = true): Observable<Submit> {
     const body = new URLSearchParams();
     const credentials = this.getCredentials();
@@ -157,6 +162,39 @@ export class HackerNewsUserService {
       }),
       catchError(this.handleError(Submit.InvalidLink))
     );
+  }
+
+
+  /**
+   * Not yet implemented in graphics and not tested
+   * @param itemId: the id of the item to be deleted
+   */
+  delete(itemId) {
+    const body = new URLSearchParams();
+    const credentials = this.getCredentials();
+    body.set('acct', credentials.username);
+    body.set('pw', credentials.password);
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    this.http.post(`/hackernews/delete-confirm?id=${itemId}`, body.toString(), {
+      headers: headers,
+      responseType: 'text',
+      withCredentials: true
+    }).pipe(
+      mergeMap((html: string) => {
+        const hmac = this.getInputValue(html, 'hmac');
+        body.set('hmac', hmac);
+        body.set('id', itemId);
+        body.set('d', 'Yes');
+        return this.http.post('/hackernews/xdelete', body.toString(), {
+          headers: headers,
+          responseType: 'text',
+          withCredentials: true
+        });
+      }),
+      catchError(this.handleError(this.handleError()))
+    ).subscribe();
   }
 
   /**
