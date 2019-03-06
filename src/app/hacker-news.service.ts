@@ -134,7 +134,7 @@ export class HackerNewsService {
    */
   getEnrichedStory(story: Story): Observable<Story> {
     story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
-    if (story.url !== undefined && false) {
+    if (story.url !== undefined) {
       return this.http.get(this.mercuryBaseApiUrl + story.url, mercuryHttpOptions)
         .pipe(
           catchError(this.handleError(null)),
