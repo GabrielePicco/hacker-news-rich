@@ -24,6 +24,7 @@ import { ShareModule } from '@ngx-share/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalUserComponent } from './modal-user/modal-user.component';
 import { VoteButtonComponent } from './vote-button/vote-button.component';
+import { ModalSubmitComponent } from './modal-submit/modal-submit.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { VoteButtonComponent } from './vote-button/vote-button.component';
     HeaderComponent,
     SearchResultsComponent,
     ModalUserComponent,
-    VoteButtonComponent
+    VoteButtonComponent,
+    ModalSubmitComponent
   ],
   imports: [
     BrowserModule,

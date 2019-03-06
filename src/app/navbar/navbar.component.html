@@ -12,6 +12,9 @@
         <li *ngFor='let s of section' class="nav-item dropdown" [class.active]="s === hackerNewsService.getCurrentSectionName()">
           <a routerLink="/feed/{{s}}" class="nav-link dropdown-toggle animated fadeIn animation-delay-5" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{s}} <i class="zmdi zmdi-chevron-down"></i></a>
         </li>
+        <li *ngIf="hackerNewsUserService.isAuthenticated" class="nav-item dropdown">
+          <a data-toggle="modal" data-target="#ms-submit-modal" class="nav-link dropdown-toggle animated fadeIn animation-delay-5" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Submit <i class="zmdi zmdi-plus"></i></a>
+        </li>
       </ul>
     </div>
     <a href="javascript:void(0)" class="ms-toggle-left btn-navbar-menu"><i class="zmdi zmdi-menu"></i></a>

@@ -1,0 +1,80 @@
+<div class="modal modal-primary" id="ms-submit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg animated zoomIn animated-3x" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block shadow-2dp no-pb">
+        <button type="button" class="close d-inline pull-right mt-2" data-dismiss="modal" aria-label="Close" #closeAccountDialog><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+        <div class="modal-title text-center">
+          <h3 class="no-m ms-site-title"><span>Submit</span></h3>
+        </div>
+        <div class="modal-header-tabs">
+          <ul class="nav nav-tabs nav-tabs-full nav-tabs-2 nav-tabs-primary" role="tablist">
+            <li class="nav-item" role="presentation"><a href="#ms-link-tab" aria-controls="ms-link-tab" role="tab" data-toggle="tab" class="nav-link active withoutripple"><i class="zmdi zmdi-link"></i> Link</a></li>
+            <li class="nav-item" role="presentation"><a href="#ms-text-tab" aria-controls="ms-text-tab" role="tab" data-toggle="tab" class="nav-link withoutripple"><i class="zmdi zmdi-comment"></i> Text</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="loading" class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+        <div *ngIf="error.title.length > 0" class="alert alert-danger alert-light alert-dismissible wow slideInDown" role="alert">
+          <strong><i class="zmdi zmdi-close-circle"></i> {{ error.title }}</strong> {{ error.desc }}
+        </div>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade active show" id="ms-link-tab">
+            <form #link="ngForm" (ngSubmit)="onSubmit(link)" autocomplete="off">
+              <fieldset>
+                <div class="form-group label-floating">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
+                    <label class="control-label" for="ms-form-title">Title</label>
+                    <input ngModel name="title" type="text" id="ms-form-title" class="form-control" required >
+                  </div>
+                </div>
+                <div class="form-group label-floating">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-link"></i></span>
+                    <label class="control-label" for="ms-form-url">Url</label>
+                    <input ngModel name="content" type="text" id="ms-form-url" class="form-control" required >
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-md-6"></div>
+                  <div class=" col-md-6">
+                    <button [class.disabled]="!link.valid" class="btn btn-raised btn-primary pull-right" type="submit">Submit</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="ms-text-tab">
+            <form #text="ngForm" (ngSubmit)="onSubmit(text, false)">
+              <fieldset>
+                <div class="form-group label-floating">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
+                    <label class="control-label" for="ms-form-title-r">Title</label>
+                    <input ngModel name="title" type="text" id="ms-form-title-r" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-group label-floating">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="zmdi zmdi-comment"></i></span>
+                    <label class="control-label" for="ms-form-text-r">Text</label>
+                    <textarea ngModel name="content" type="text" id="ms-form-text-r" class="form-control" rows="5" required></textarea>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-md-6"></div>
+                  <div class=" col-md-6">
+                    <button [class.disabled]="!text.valid" class="btn btn-raised btn-primary pull-right" type="submit">Submit</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

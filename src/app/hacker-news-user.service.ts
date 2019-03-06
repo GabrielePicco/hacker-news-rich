@@ -6,6 +6,7 @@ import {Observable, of} from 'rxjs';
 import {Login} from './login.enum';
 import {Credentials} from './credentials';
 import * as CryptoJS from 'crypto-js';
+import {Submit} from './submit.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class HackerNewsUserService {
 
   isAuthenticated = false;
   username: string;
+  existingArticleId: string;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
     this.validateCredentials();
@@ -84,6 +86,11 @@ export class HackerNewsUserService {
     ).subscribe();
   }
 
+  /**
+   * Add a vote to an item
+   * @param itemId: the id of the item
+   * @param how: up or un (unvote)
+   */
   vote(itemId: string, how: string) {
     const body = new URLSearchParams();
     const credentials = this.getCredentials();
@@ -101,6 +108,69 @@ export class HackerNewsUserService {
     }).pipe(
       catchError(this.handleError(null))
     ).subscribe();
+  }
+
+
+  submit(title: string, content: string, isUrl = true): Observable<Submit> {
+    const body = new URLSearchParams();
+    const credentials = this.getCredentials();
+    body.set('acct', credentials.username);
+    body.set('pw', credentials.password);
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    return this.http.post('/hackernews/submit', body.toString(), {
+      headers: headers,
+      responseType: 'text',
+      withCredentials: true
+    }).pipe(
+      mergeMap((html: string) => {
+        const fnid = this.getInputValue(html, 'fnid');
+        const fnop = this.getInputValue(html, 'fnop');
+        body.set('fnop', fnop);
+        body.set('fnid', fnid);
+        if (isUrl === true) {
+          body.set('url', content);
+        } else {
+          body.set('text', content);
+        }
+        body.set('title', title);
+        return this.http.post('/hackernews/r', body.toString(), {
+          headers: headers,
+          responseType: 'text',
+          withCredentials: true
+        }).pipe(
+          mergeMap((result: string) => {
+            let path = result.match('login\\?goto=[^"]+')[0];
+            path = path.replace('login?goto=', '');
+            const existingLinkPath = 'item%3Fid%3D';
+            if (path.indexOf(existingLinkPath) !== -1) {
+              const id = path.replace('item%3Fid%3D', '');
+              this.existingArticleId = id;
+              return of(Submit.ExistingLink);
+            } else {
+              return of(Submit.Ok);
+            }
+          }),
+          catchError(this.handleSubmitError()),
+        );
+      }),
+      catchError(this.handleError(Submit.InvalidLink))
+    );
+  }
+
+  /**
+   * Get the value attribute from an input box
+   * @param html: the html strinh
+   * @param name: the input box name
+   */
+  private getInputValue(html: string, name: string): string {
+    const value = html.match(`<\\s*input[^>]*name="${name}"[^>]*>`);
+    if (value != null) {
+      return value[0].match('value[^"]*"([^"]*)"')[1];
+    } else {
+      return null;
+    }
   }
 
 
@@ -161,6 +231,19 @@ export class HackerNewsUserService {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
+    };
+  }
+
+  /**
+   * Handle the submit errors
+   */
+  private handleSubmitError<T>() {
+    return (error: any): Observable<Submit> => {
+      if (error.url.indexOf('story-toofast') !== -1) {
+        return of(Submit.TooFast);
+      } else {
+        return of(Submit.InvalidLink);
+      }
     };
   }
 }
