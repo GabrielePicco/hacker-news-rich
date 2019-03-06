@@ -16,9 +16,9 @@ const mercuryHttpOptions = {
 };
 
 export const HN_SECTION = [
-  {name: 'Top Story', subpath: 'topstories'},
-  {name: 'New Story', subpath: 'newstories'},
-  {name: 'Best Story', subpath: 'beststories'},
+  {name: 'TopStory', subpath: 'topstories'},
+  {name: 'NewStory', subpath: 'newstories'},
+  {name: 'BestStory', subpath: 'beststories'},
   {name: 'Show', subpath: 'showstories'},
   {name: 'Ask', subpath: 'askstories'},
   {name: 'Job', subpath: 'jobstories'},

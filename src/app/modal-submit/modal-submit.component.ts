@@ -32,7 +32,7 @@ export class ModalSubmitComponent implements OnInit {
           this.loading = false;
           if (res === Submit.Ok) {
             this.closeBtn.nativeElement.click();
-            this.router.navigate([`/feed/${HN_SECTION[1].name}`]);
+            this.router.navigate([`/${HN_SECTION[1].name}`]);
           } else if (res === Submit.ExistingLink) {
             this.closeBtn.nativeElement.click();
             this.router.navigate([`/post/${this.hackerNewsUserService.existingArticleId}`]);
