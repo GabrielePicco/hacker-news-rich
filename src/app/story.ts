@@ -11,7 +11,6 @@ export class Story {
   content: string;
   domain: string;
   description: string;
-  wordCount: number;
   url: string;
   type: string;
 }

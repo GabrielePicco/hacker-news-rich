@@ -18,7 +18,7 @@
     </header>
     <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
       <li *ngFor='let s of section'>
-        <a class="link ms-toggle-left" routerLink="/feed/{{s}}"> {{s}}</a>
+        <a class="link ms-toggle-left" routerLink="/{{s}}"> {{s}}</a>
       </li>
       <li *ngIf="hackerNewsUserService.isAuthenticated">
         <a class="link ms-toggle-left" routerLink="/profile/{{hackerNewsUserService.username}}"><i class="zmdi zmdi-account"></i> Profile</a>

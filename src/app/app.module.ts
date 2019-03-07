@@ -25,6 +25,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { ModalUserComponent } from './modal-user/modal-user.component';
 import { VoteButtonComponent } from './vote-button/vote-button.component';
 import { ModalSubmitComponent } from './modal-submit/modal-submit.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -53,9 +57,11 @@ import { ModalSubmitComponent } from './modal-submit/modal-submit.component';
     HttpClientModule,
     InfiniteScrollModule,
     EmojifyModule,
-    ShareModule
+    ShareModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

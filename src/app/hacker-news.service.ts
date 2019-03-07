@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, from} from 'rxjs';
 import {catchError, mergeMap, tap} from 'rxjs/operators';
 import {Story} from './story';
 import {User} from './user';
 import {Comment} from './comment';
 import {ActivatedRoute} from '@angular/router';
 import {HackerNewsSearchService} from './hacker-news-search.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
+import * as firebase from 'firebase';
 
 const mercuryHttpOptions = {
   headers: new HttpHeaders({
@@ -29,6 +32,16 @@ export const HN_SECTION = [
   providedIn: 'root'
 })
 export class HackerNewsService {
+
+  constructor(private http: HttpClient,
+              private route: ActivatedRoute,
+              private hackerNewsSearch: HackerNewsSearchService,
+              private firestore: AngularFirestore) {
+    this.route.params.subscribe(routeParams => {
+      this.currentSection = routeParams.section;
+    });
+    this.cache = firestore.collection<Story>('cache');
+  }
   private baseApiUrl = 'https://hacker-news.firebaseio.com/v0/';
   private mercuryBaseApiUrl = 'https://mercury.postlight.com/parser?url=';
   private defaultStoryImageUrls = [
@@ -49,14 +62,28 @@ export class HackerNewsService {
   private currentPosition: number;
   private batchSize = 3;
   private currentSection = HN_SECTION[0].name;
+  private cache: AngularFirestoreCollection<Story>;
   TITLE = 'Hacker News';
 
-  constructor(private http: HttpClient,
-              private route: ActivatedRoute,
-              private hackerNewsSearch: HackerNewsSearchService) {
-    this.route.params.subscribe(routeParams => {
-      this.currentSection = routeParams.section;
-    });
+  /**
+   * Enrich a story with the info retrievied with a mercury URL query
+   * @param story: the story to be enriched
+   * @param mercuryStory: the mercury query result
+   */
+  private static enrichStory(story: Story, mercuryStory): Story {
+    if (story === undefined || mercuryStory === undefined) {
+      return story;
+    }
+    if (mercuryStory.lead_image_url !== undefined && mercuryStory.lead_image_url != null) {
+      story.leadImageUrl = mercuryStory.lead_image_url;
+    }
+    story.content = mercuryStory.content;
+    story.domain = mercuryStory.domain;
+    story.description = mercuryStory.excerpt;
+    if (mercuryStory.excerpt !== undefined && mercuryStory.excerpt.length > story.description.length) {
+      story.description = mercuryStory.excerpt;
+    }
+    return story;
   }
 
   /**
@@ -130,19 +157,28 @@ export class HackerNewsService {
 
   /**
    * Enrich a basic story with image and information from the mercury API
+   * Use as Cloud Firestore Collection as a cache
    * @param story: the story HN item
    */
   getEnrichedStory(story: Story): Observable<Story> {
     story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
     if (story.url !== undefined) {
-      return this.http.get(this.mercuryBaseApiUrl + story.url, mercuryHttpOptions)
-        .pipe(
-          catchError(this.handleError(null)),
-          mergeMap(mercuryStory => {
-            this.enrichStory(story, mercuryStory);
-            return of(story);
-          })
-        );
+      try {
+        return from(this.cache.doc(story.id.toString()).ref.get())
+          .pipe(
+            mergeMap((doc: DocumentSnapshot) => {
+              if (doc.exists) {
+                const mercuryStory = doc.data();
+                mercuryStory.lead_image_url = mercuryStory.leadImageUrl;
+                return of(HackerNewsService.enrichStory(story, mercuryStory));
+              } else {
+                return this.getMercuryEnrichedStory(story);
+              }
+            })
+          );
+      } catch (e) {
+        return this.getMercuryEnrichedStory(story);
+      }
     } else {
       story.description = story.text;
       return of(story);
@@ -150,24 +186,23 @@ export class HackerNewsService {
   }
 
   /**
-   * Enrich a story with the info retrievied with a mercury URL query
-   * @param story: the story to be enriched
-   * @param mercuryStory: the mercury query result
+   * Enrich the story retrieving information from the mercury API
+   * @param story: the simple HN story
    */
-  private enrichStory(story: Story, mercuryStory) {
-    if (story == null || mercuryStory == null) {
-      return;
-    }
-    if (mercuryStory.lead_image_url !== null) {
-      story.leadImageUrl = mercuryStory.lead_image_url;
-    }
-    story.content = mercuryStory.content;
-    story.domain = mercuryStory.domain;
-    story.description = mercuryStory.excerpt;
-    if (mercuryStory.excerpt.length > story.description.length) {
-      story.description = mercuryStory.excerpt;
-    }
-    story.wordCount = mercuryStory.wordCount;
+  getMercuryEnrichedStory(story): Observable<Story> {
+    return this.http.get(this.mercuryBaseApiUrl + story.url, mercuryHttpOptions)
+      .pipe(
+        mergeMap(mercuryStory => {
+          story = HackerNewsService.enrichStory(story, mercuryStory);
+          try {
+            this.cache.doc(story.id.toString()).set(story);
+          } catch (e) {
+            console.log(e);
+          }
+          return of(story);
+        }),
+        catchError(this.handleError(story))
+      );
   }
 
   /**
@@ -184,11 +219,11 @@ export class HackerNewsService {
     if (section !== 'launch') {
       return this.http.get<number[]>(this.baseApiUrl + section + '.json')
         .pipe(
-          catchError(this.handleError([])),
           mergeMap(newsIDs => {
             this.newsIDs = newsIDs;
             return this.getNextNewsIDs();
-          })
+          }),
+          catchError(this.handleError([]))
         );
     } else {
       return this.hackerNewsSearch.getLaunchHNStory()
@@ -226,7 +261,7 @@ export class HackerNewsService {
    */
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      // console.error(error);
       return of(result as T);
     };
   }
