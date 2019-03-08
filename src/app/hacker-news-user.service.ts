@@ -41,7 +41,7 @@ export class HackerNewsUserService {
       'Access-Control-Allow-Credentials': 'false'
     };
     console.log(body.toString());
-    return this.http.post('http://www.hn.com/login', body.toString(), {
+    return this.http.post('/hackernews/login', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
@@ -82,7 +82,7 @@ export class HackerNewsUserService {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    return this.http.post('https://www.hackernews.com/comment', body.toString(), {
+    return this.http.post('/hackernews/comment', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
