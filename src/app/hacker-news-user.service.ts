@@ -38,13 +38,14 @@ export class HackerNewsUserService {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
+    console.log(body.toString());
     return this.http.post('/hackernews/login', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: true
     }).pipe(
-        catchError(this.handleError(null)),
         mergeMap((result: string) => {
+          console.log(result);
           if (result.length > 2000) {
             password = CryptoJS.AES.encrypt(password, username).toString();
             this.cookieService.set('userinfo', `${username}&${password}`, 3000);
@@ -56,7 +57,8 @@ export class HackerNewsUserService {
           } else {
             return of(Login.Wrong);
           }
-        })
+        }),
+        catchError(this.handleError(null))
       );
   }
 
