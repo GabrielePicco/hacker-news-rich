@@ -18,7 +18,7 @@ export class HackerNewsUserService {
   existingArticleId: string;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    this.validateCredentials();
+    // this.validateCredentials();
   }
 
   /**
@@ -28,7 +28,7 @@ export class HackerNewsUserService {
    * @param createAccount: if true, manage as a registration
    */
   login(username: string, password: string, createAccount = false): Observable<Login> {
-    const body = new URLSearchParams();
+    /*const body = new URLSearchParams();
     body.set('goto', 'news');
     body.set('acct', username);
     body.set('pw', password);
@@ -40,17 +40,14 @@ export class HackerNewsUserService {
       'cache-control': 'no-cache',
       'Access-Control-Allow-Credentials': 'false'
     };
-    console.log(body.toString());
     return this.http.post('/hackernews/login', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
     }).pipe(
         mergeMap((result: string) => {
-          console.log(result);
           if (result.length > 2000) {
             password = CryptoJS.AES.encrypt(password, username).toString();
-            this.cookieService.set('user', 'ok', 0.001, '/hackernews', 'www.hacker-news.news', true);
             this.cookieService.set('userinfo', `${username}&${password}`, 5000);
             this.username = username;
             this.isAuthenticated = true;
@@ -62,7 +59,9 @@ export class HackerNewsUserService {
           }
         }),
         catchError(this.handleError(null))
-      );
+      );*/
+      this.cookieService.set('userinfo', `${username}&${password}`, 5000);
+      return of(Login.Ok);
   }
 
 
@@ -88,7 +87,7 @@ export class HackerNewsUserService {
       withCredentials: true
     }).pipe(
       catchError(this.handleError(null))
-    ).subscribe(result => console.log(result));
+    ).subscribe();
   }
 
   /**
@@ -272,7 +271,6 @@ export class HackerNewsUserService {
    */
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
       return of(result as T);
     };
   }
