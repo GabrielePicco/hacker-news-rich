@@ -51,7 +51,7 @@ export class HackerNewsUserService {
           if (result.length > 2000) {
             password = CryptoJS.AES.encrypt(password, username).toString();
             this.cookieService.deleteAll();
-            this.cookieService.set('user', `ok`, 5000, '/hackernews', 'www.hacker-news.news', true);
+            this.cookieService.set('user', 'ok', 5000, '/hackernews', 'www.hacker-news.news', true);
             this.cookieService.set('userinfo', `${username}&${password}`, 5000);
             this.username = username;
             this.isAuthenticated = true;
@@ -75,8 +75,8 @@ export class HackerNewsUserService {
   comment(parentId: string, text: string) {
     const body = new URLSearchParams();
     const credentials = this.getCredentials();
-    body.set('acct', credentials.username);
-    body.set('pw', credentials.password);
+    //body.set('acct', credentials.username);
+    //body.set('pw', credentials.password);
     body.set('parent', parentId);
     body.set('text', text);
     body.set('goto', 'news');
@@ -86,7 +86,7 @@ export class HackerNewsUserService {
     return this.http.post('/hackernews/comment', body.toString(), {
       headers: headers,
       responseType: 'text',
-      withCredentials: false
+      withCredentials: true
     }).pipe(
       catchError(this.handleError(null))
     ).subscribe(result => console.log(result));
