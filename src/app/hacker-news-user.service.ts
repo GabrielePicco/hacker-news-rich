@@ -36,7 +36,8 @@ export class HackerNewsUserService {
       body.set('creating', 't');
     }
     const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'cache-control': 'no-cache'
     };
     console.log(body.toString());
     return this.http.post('/hackernews/login', body.toString(), {
