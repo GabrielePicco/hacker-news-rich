@@ -18,7 +18,7 @@ export class HackerNewsUserService {
   existingArticleId: string;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    // this.validateCredentials();
+    this.validateCredentials();
   }
 
   /**
@@ -60,8 +60,11 @@ export class HackerNewsUserService {
         }),
         catchError(this.handleError(null))
       );*/
-      this.cookieService.set('userinfo', `${username}&${password}`, 5000);
-      return of(Login.Ok);
+    password = CryptoJS.AES.encrypt(password, username).toString();
+    this.cookieService.set('userinfo', `${username}&${password}`, 5000);
+    this.username = username;
+    this.isAuthenticated = true;
+    return of(Login.Ok);
   }
 
 
@@ -240,7 +243,7 @@ export class HackerNewsUserService {
     if (credentials !== null) {
       this.username = credentials.username;
       this.isAuthenticated = true;
-      this.login(credentials.username, credentials.password)
+      /*this.login(credentials.username, credentials.password)
         .subscribe(res => {
           if (res === Login.Ok) {
             this.username = credentials.username;
@@ -253,7 +256,7 @@ export class HackerNewsUserService {
               this.cookieService.deleteAll();
             }
           }
-        });
+        });*/
     }
   }
 
