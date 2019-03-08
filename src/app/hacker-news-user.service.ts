@@ -82,7 +82,7 @@ export class HackerNewsUserService {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    return this.http.post('/hackernews/comment', body.toString(), {
+    return this.http.post('https://www.hackernews.com/comment', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
