@@ -37,7 +37,8 @@ export class HackerNewsUserService {
     }
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'cache-control': 'no-cache'
+      'cache-control': 'no-cache',
+      'Access-Control-Allow-Credentials': 'false'
     };
     console.log(body.toString());
     return this.http.post('/hackernews/login', body.toString(), {
@@ -73,8 +74,8 @@ export class HackerNewsUserService {
   comment(parentId: string, text: string) {
     const body = new URLSearchParams();
     const credentials = this.getCredentials();
-    //body.set('acct', credentials.username);
-    //body.set('pw', credentials.password);
+    body.set('acct', credentials.username);
+    body.set('pw', credentials.password);
     body.set('parent', parentId);
     body.set('text', text);
     body.set('goto', 'news');
