@@ -83,7 +83,7 @@ export class HackerNewsUserService {
       withCredentials: true
     }).pipe(
       catchError(this.handleError(null))
-    ).subscribe();
+    ).subscribe(result => console.log(result));
   }
 
   /**
