@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: ':section', component: FeedComponent},
   { path: 'post/:id', component: PostComponent},
   { path: 'profile/:username', component: ProfileComponent},
-  { path: 'search', component: SearchComponent},
+  { path: 'hn/search', component: SearchComponent},
 ];
 
 @NgModule({

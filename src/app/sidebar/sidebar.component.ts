@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onSearchChange(term: string) {
-    const searchPath = '/search';
+    const searchPath = '/hn/search';
     this.location.go(searchPath + '?query=' + term);
     this.router.navigate([searchPath]);
     this.hackerNewsSearchService.searchStory(term);
