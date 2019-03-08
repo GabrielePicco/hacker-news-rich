@@ -51,6 +51,7 @@ export class HackerNewsUserService {
           if (result.length > 2000) {
             password = CryptoJS.AES.encrypt(password, username).toString();
             this.cookieService.deleteAll();
+            this.cookieService.set('user', `ok`, 5000, '/hackernews');
             this.cookieService.set('userinfo', `${username}&${password}`, 5000);
             this.username = username;
             this.isAuthenticated = true;
