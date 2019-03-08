@@ -42,7 +42,7 @@ export class HackerNewsUserService {
     return this.http.post('/hackernews/login', body.toString(), {
       headers: headers,
       responseType: 'text',
-      withCredentials: true
+      withCredentials: false
     }).pipe(
         mergeMap((result: string) => {
           console.log(result);
@@ -82,7 +82,7 @@ export class HackerNewsUserService {
     return this.http.post('/hackernews/comment', body.toString(), {
       headers: headers,
       responseType: 'text',
-      withCredentials: true
+      withCredentials: false
     }).pipe(
       catchError(this.handleError(null))
     ).subscribe(result => console.log(result));
@@ -106,7 +106,7 @@ export class HackerNewsUserService {
     return this.http.post('/hackernews/vote', body.toString(), {
       headers: headers,
       responseType: 'text',
-      withCredentials: true
+      withCredentials: false
     }).pipe(
       catchError(this.handleError(null))
     ).subscribe();
@@ -129,7 +129,7 @@ export class HackerNewsUserService {
     return this.http.post('/hackernews/submit', body.toString(), {
       headers: headers,
       responseType: 'text',
-      withCredentials: true
+      withCredentials: false
     }).pipe(
       mergeMap((html: string) => {
         const fnid = this.getInputValue(html, 'fnid');
@@ -145,7 +145,7 @@ export class HackerNewsUserService {
         return this.http.post('/hackernews/r', body.toString(), {
           headers: headers,
           responseType: 'text',
-          withCredentials: true
+          withCredentials: false
         }).pipe(
           mergeMap((result: string) => {
             let path = result.match('login\\?goto=[^"]+')[0];
@@ -182,7 +182,7 @@ export class HackerNewsUserService {
     this.http.post(`/hackernews/delete-confirm?id=${itemId}`, body.toString(), {
       headers: headers,
       responseType: 'text',
-      withCredentials: true
+      withCredentials: false
     }).pipe(
       mergeMap((html: string) => {
         const hmac = this.getInputValue(html, 'hmac');
@@ -192,7 +192,7 @@ export class HackerNewsUserService {
         return this.http.post('/hackernews/xdelete', body.toString(), {
           headers: headers,
           responseType: 'text',
-          withCredentials: true
+          withCredentials: false
         });
       }),
       catchError(this.handleError(this.handleError()))
