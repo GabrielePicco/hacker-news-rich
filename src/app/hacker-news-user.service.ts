@@ -41,7 +41,7 @@ export class HackerNewsUserService {
       'Access-Control-Allow-Credentials': 'false'
     };
     console.log(body.toString());
-    return this.http.post('https://www.hackernews.com/login', body.toString(), {
+    return this.http.post('http://www.hn.com/login', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
