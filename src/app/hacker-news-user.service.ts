@@ -50,7 +50,7 @@ export class HackerNewsUserService {
           if (result.length > 2000) {
             password = CryptoJS.AES.encrypt(password, username).toString();
             this.cookieService.deleteAll();
-            this.cookieService.set('userinfo', `${username}&${password}`, 3000);
+            this.cookieService.set('userinfo', `${username}&${password}`, 5000);
             this.username = username;
             this.isAuthenticated = true;
             return of(Login.Ok);
@@ -73,8 +73,8 @@ export class HackerNewsUserService {
   comment(parentId: string, text: string) {
     const body = new URLSearchParams();
     const credentials = this.getCredentials();
-    body.set('acct', credentials.username);
-    body.set('pw', credentials.password);
+    //body.set('acct', credentials.username);
+    //body.set('pw', credentials.password);
     body.set('parent', parentId);
     body.set('text', text);
     body.set('goto', 'news');
