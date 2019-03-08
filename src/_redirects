@@ -1,2 +1,2 @@
-https://www.hackernews.com/*   https://news.ycombinator.com/:splat  200
+http://www.hn.com/*   https://news.ycombinator.com/:splat  200
 /*  /index.html 200
