@@ -29,6 +29,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { GtagModule } from 'angular-gtag';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
     EmojifyModule,
     ShareModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    GtagModule.forRoot({ trackingId: 'UA-YOUR_TRACKING_ID', trackPageviews: true })
   ],
   providers: [CookieService, AngularFirestore],
   bootstrap: [AppComponent]
