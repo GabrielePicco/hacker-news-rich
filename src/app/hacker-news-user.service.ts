@@ -28,7 +28,7 @@ export class HackerNewsUserService {
    * @param createAccount: if true, manage as a registration
    */
   login(username: string, password: string, createAccount = false): Observable<Login> {
-    /*const body = new URLSearchParams();
+    const body = new URLSearchParams();
     body.set('goto', 'news');
     body.set('acct', username);
     body.set('pw', password);
@@ -40,7 +40,7 @@ export class HackerNewsUserService {
       'cache-control': 'no-cache',
       'Access-Control-Allow-Credentials': 'false'
     };
-    return this.http.post('/hackernews/login', body.toString(), {
+    return this.http.post('https://www.hacker-news.news/.netlify/functions/login', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
@@ -59,12 +59,7 @@ export class HackerNewsUserService {
           }
         }),
         catchError(this.handleError(null))
-      );*/
-    password = CryptoJS.AES.encrypt(password, username).toString();
-    this.cookieService.set('userinfo', `${username}&${password}`, 5000);
-    this.username = username;
-    this.isAuthenticated = true;
-    return of(Login.Ok);
+      );
   }
 
 
@@ -243,7 +238,7 @@ export class HackerNewsUserService {
     if (credentials !== null) {
       this.username = credentials.username;
       this.isAuthenticated = true;
-      /*this.login(credentials.username, credentials.password)
+      this.login(credentials.username, credentials.password)
         .subscribe(res => {
           if (res === Login.Ok) {
             this.username = credentials.username;
@@ -256,7 +251,7 @@ export class HackerNewsUserService {
               this.cookieService.deleteAll();
             }
           }
-        });*/
+        });
     }
   }
 
