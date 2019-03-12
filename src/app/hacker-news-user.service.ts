@@ -40,7 +40,7 @@ export class HackerNewsUserService {
       'cache-control': 'no-cache',
       'Access-Control-Allow-Credentials': 'false'
     };
-    return this.http.post('https://www.hacker-news.news/.netlify/functions/login', body.toString(), {
+    return this.http.post('/hackernews/login', body.toString(), {
       headers: headers,
       responseType: 'text',
       withCredentials: false
@@ -60,6 +60,11 @@ export class HackerNewsUserService {
         }),
         catchError(this.handleError(null))
       );
+    password = CryptoJS.AES.encrypt(password, username).toString();
+    this.cookieService.set('userinfo', `${username}&${password}`, 5000);
+    this.username = username;
+    this.isAuthenticated = true;
+    return of(Login.Ok);
   }
 
 

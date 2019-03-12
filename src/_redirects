@@ -1,2 +1,2 @@
-/hackernews/*   https://news.ycombinator.com/:splat  200
+/hackernews/*   https://www.hacker-news.news/.netlify/functions/:splat  200
 /*  /index.html 200

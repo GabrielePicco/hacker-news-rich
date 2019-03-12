@@ -1,9 +1,9 @@
 {
   "/hackernews/*": {
     "target":  {
-      "host": "news.ycombinator.com",
-      "protocol": "https:",
-      "port": 443
+      "host": "localhost",
+      "protocol": "http:",
+      "port": 9000
     },
     "secure": false,
     "logLevel": "info",
