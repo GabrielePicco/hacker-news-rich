@@ -19,7 +19,10 @@ export class FeedItemComponent implements OnInit {
               public hackerNewsUserService: HackerNewsUserService) { }
 
   ngOnInit() {
-    this.hackerNewsService.getEnrichedStoryByID(this.itemID).subscribe(item => this.item = item);
+    this.hackerNewsService.getStoryByID(this.itemID).subscribe(item => {
+      this.item = item;
+      this.hackerNewsService.getEnrichedStory(this.item).subscribe(itemRich => this.item = itemRich);
+    });
   }
 
   vote(id: string) {

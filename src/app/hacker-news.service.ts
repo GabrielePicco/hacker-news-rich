@@ -138,6 +138,22 @@ export class HackerNewsService {
   }
 
   /**
+   * Get a story from the HN API
+   * @param id: the HN story ID
+   */
+  getStoryByID(id: Number): Observable<Story> {
+    return this.http.get<Story>(this.baseApiUrl + 'item/' + id + '.json')
+      .pipe(
+        catchError(this.handleError(null)),
+        mergeMap((story: Story) => {
+          story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
+          story.description = story.text;
+          return of(story);
+        })
+      );
+  }
+
+  /**
    * Return the parent Story (not enriched) given an id
    * @param id: the story ID
    */

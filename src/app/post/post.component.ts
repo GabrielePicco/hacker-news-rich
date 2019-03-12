@@ -28,8 +28,9 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.hackerNewsService.getEnrichedStoryByID(this.id).subscribe(item => {
+    this.hackerNewsService.getStoryByID(this.id).subscribe(item => {
       this.item = item;
+      this.hackerNewsService.getEnrichedStory(this.item).subscribe(itemRich => this.item = itemRich);
       this.titleService.setTitle(item.title);
       this.onScroll();
     });
