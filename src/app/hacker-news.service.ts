@@ -177,7 +177,9 @@ export class HackerNewsService {
    * @param story: the story HN item
    */
   getEnrichedStory(story: Story): Observable<Story> {
-    story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
+    if (story.leadImageUrl === undefined) {
+      story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
+    }
     if (story.url !== undefined) {
       try {
         return from(this.cache.doc(story.id.toString()).ref.get())
