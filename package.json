@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "start:lambda": "netlify-lambda serve lambda-src",
+    "build:lambda": "netlify-lambda build lambda-src"
   },
   "private": true,
   "dependencies": {
@@ -22,8 +24,10 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@ngx-share/core": "^7.1.2",
+    "@postlight/mercury-parser": "^2.1.1",
     "angular-emojify": "^1.0.0",
     "angular-gtag": "^1.0.3",
+    "axios": "^0.19.0",
     "component": "^1.1.0",
     "core-js": "^2.5.4",
     "crypto-js": "^3.1.9-1",
@@ -36,13 +40,13 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.12.0",
+    "@angular-devkit/build-angular": "^0.803.0",
     "@angular/cli": "~7.2.1",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
