@@ -43,7 +43,7 @@ export class HackerNewsService {
     this.cache = firestore.collection<Story>('cache');
   }
   private baseApiUrl = 'https://hacker-news.firebaseio.com/v0/';
-  private mercuryBaseApiUrl = 'https://mercury.postlight.com/parser?url=';
+  private mercuryBaseApiUrl = '/hackernews/parser?url=';
   private defaultStoryImageUrls = [
     'https://androidwidgetcenter.com/wp-content/uploads/2013/02/Google-Now.jpeg',
     'http://www.revistasmartphone.com/wp-content/uploads/2016/07/android-lollipop-wallpapers-google-now-wallpaper-3.png',
