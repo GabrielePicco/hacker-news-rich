@@ -43,7 +43,7 @@ export class HackerNewsService {
     this.cache = firestore.collection<Story>('cache');
   }
   private baseApiUrl = 'https://hacker-news.firebaseio.com/v0/';
-  private mercuryBaseApiUrl = '/hackernews/parser?url=';
+  private mercuryBaseApiUrl = '/hackernews/parse?url=';
   private defaultStoryImageUrls = [
     'https://androidwidgetcenter.com/wp-content/uploads/2013/02/Google-Now.jpeg',
     'http://www.revistasmartphone.com/wp-content/uploads/2016/07/android-lollipop-wallpapers-google-now-wallpaper-3.png',
@@ -208,7 +208,7 @@ export class HackerNewsService {
    * @param story: the simple HN story
    */
   getMercuryEnrichedStory(story): Observable<Story> {
-    return this.http.get(this.mercuryBaseApiUrl + story.url, mercuryHttpOptions)
+    return this.http.get(this.mercuryBaseApiUrl + story.url)
       .pipe(
         mergeMap(mercuryStory => {
           story = HackerNewsService.enrichStory(story, mercuryStory);
