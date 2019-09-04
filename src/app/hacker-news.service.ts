@@ -45,18 +45,18 @@ export class HackerNewsService {
   private baseApiUrl = 'https://hacker-news.firebaseio.com/v0/';
   private mercuryBaseApiUrl = '/hackernews/parse?url=';
   private defaultStoryImageUrls = [
-    'https://androidwidgetcenter.com/wp-content/uploads/2013/02/Google-Now.jpeg',
-    'http://www.revistasmartphone.com/wp-content/uploads/2016/07/android-lollipop-wallpapers-google-now-wallpaper-3.png',
-    'https://wallpaperhdzone.com/wp-content/uploads/2016/09/york-wallpaper-outlet-HD3.jpg',
+    'https://i.imgur.com/DX877VD.png',
+    'https://i.imgur.com/o0CDhjr.jpg',
+    'https://i.imgur.com/QGeDXnG.png',
     'https://i.imgur.com/LnMirAw.png',
-    'https://userscontent2.emaze.com/images/8a6449e6-1c86-457f-9cfc-e64d11e89fd1/8cdd930935b8ba2786ddf02f7ad8792d.png',
-    'https://www.aivanet.com/wp-content/uploads/2016/01/Materail-and-Flat-Wallpapers-840x473-2.jpg',
-    'https://cdn.wallpapersafari.com/4/10/xI3Vk0.png',
-    'https://cdn.wallpapersafari.com/55/85/4Tm6rZ.png',
-    'https://cdn.wallpapersafari.com/85/49/qZtyor.png',
-    'https://i.pinimg.com/originals/0a/58/4b/0a584b8a68560bb617b95180f0e38c70.png',
-    'http://www.tokkoro.com/thumbs/5014351-minimalism-beach-boat-mountains-sunset-birds-hd-artist-artwork-digital-art-sea-4k-5k-8k.jpg',
-    'http://farm9.staticflickr.com/8258/8781996610_bebf06f966_c.jpg'
+    'https://i.imgur.com/0TaSNEy.png',
+    'https://i.imgur.com/XzHiGKy.jpg',
+    'https://i.imgur.com/aWvC7UB.png',
+    'https://i.imgur.com/64ShGwN.jpg',
+    'https://i.imgur.com/TwzilYz.png',
+    'https://i.imgur.com/oyRsrCZ.jpg',
+    'https://i.imgur.com/DIVgtHa.png',
+    'https://i.imgur.com/k3C388y.jpg'
   ];
   private newsIDs: number[] = [];
   private currentPosition: number;
