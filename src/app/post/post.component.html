@@ -1,24 +1,25 @@
-<div *ngIf="item != undefined; else loading" class="container" infiniteScroll (scrolled)="onScroll()">
+<div *ngIf="post.article != undefined; else loading" class="container" infiniteScroll (scrolled)="onScroll()">
   <div class="row">
     <div class="col-lg-8">
       <div class="card animated fadeInLeftTiny animation-delay-5">
         <div class="card-body card-body-big">
-          <h1 class="no-mt"><app-vote-button [itemId]="item.id"></app-vote-button><a *ngIf="item.url != undefined" [href]="item.url" target="_blank">{{ item.title }}</a><span class="primary-color" *ngIf="item.url == undefined"> {{ item.title }} </span></h1>
+          <h1 class="no-mt"><app-vote-button [itemId]="post.article.id"></app-vote-button><a *ngIf="post.article.url != undefined" [href]="post.article.url" target="_blank">{{ post.article.title }}</a><span class="primary-color" *ngIf="post.article.url == undefined"> {{ post.article.title }} </span></h1>
           <div class="mb-4">
-            <span class="d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
-            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'H:mm'}}</span></span>
-            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }}</span></span>
-            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }}</span></span>
-            <span class="ml-1">{{ item.domain }}</span>
+            <span class="d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ post.article.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
+            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ post.article.time * 1000 | date: 'H:mm'}}</span></span>
+            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ post.article.score }}</span></span>
+            <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ post.article.descendants }}</span></span>
+            <span class="ml-1">{{ post.article.domain }}</span>
           </div>
-          <img [src]="item.leadImageUrl" class="img-fluid mb-4">
-          <p [innerHTML]="item.text"></p>
-          <a *ngIf="item.url != undefined" [href]="item.url" target="_blank" class="btn btn-primary btn-raised btn-block animate-icon">Read the original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+          <img [src]="post.article.leadImageUrl" class="img-fluid mb-4">
+          <p [innerHTML]="post.article.content === undefined ? post.article.text : post.article.content"></p>
+          <br>
+          <a *ngIf="post.article.url != undefined" [href]="post.article.url" target="_blank" class="btn btn-primary btn-raised btn-block animate-icon">Read the original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
         </div>
       </div>
     </div>
     <div class="col-lg-4">
-    <app-profile-sidebar [by]="item.by"></app-profile-sidebar>
+    <app-profile-sidebar [by]="post.article.by"></app-profile-sidebar>
     </div>
   </div>
   <div class="row wow materialUp animation-delay-8">
@@ -29,7 +30,7 @@
           <textarea [(ngModel)]="replyText" style="border: none; outline: none;-webkit-box-shadow: none;-moz-box-shadow: none;box-shadow: none;" class="form-control" rows="2" id="textArea"></textarea>
         </div>
         <div style="background: whitesmoke;" class="card-footer">
-          <a (click)="addComment(item.id.toString(), replyText)" class="btn btn-primary btn-raised" > Add comment </a>
+          <a (click)="addComment(post.article.id.toString(), replyText)" class="btn btn-primary btn-raised" > Add comment </a>
         </div>
       </div>
       <ul class="ms-timeline">

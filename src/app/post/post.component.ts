@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Story} from '../story';
 import {HackerNewsService} from '../hacker-news.service';
-import {Title} from '@angular/platform-browser';
+import {DomSanitizer, Title} from '@angular/platform-browser';
 import {HackerNewsUserService} from '../hacker-news-user.service';
 import {Comment} from '../comment';
 
@@ -13,8 +13,7 @@ import {Comment} from '../comment';
 })
 export class PostComponent implements OnInit {
 
-  post = {comments : []};
-  item: Story;
+  post = {comments : [], article : undefined};
   replyComment: Comment;
   replyText: string;
   private id: number;
@@ -24,20 +23,24 @@ export class PostComponent implements OnInit {
   constructor(private titleService: Title,
               private route: ActivatedRoute,
               private hackerNewsService: HackerNewsService,
-              public hackerNewsUserService: HackerNewsUserService) { }
+              public hackerNewsUserService: HackerNewsUserService,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.hackerNewsService.getStoryByID(this.id).subscribe(item => {
-      this.item = item;
-      this.hackerNewsService.getEnrichedStory(this.item).subscribe(itemRich => this.item = itemRich);
+    this.hackerNewsService.getStoryByID(this.id).subscribe((item: Story) => {
+      this.post.article = item;
+      this.hackerNewsService.getEnrichedStory(this.post.article).subscribe(itemRich => {
+        this.post.article = itemRich;
+        this.post.article.content = this.sanitizer.bypassSecurityTrustHtml(this.post.article.content);
+      });
       this.titleService.setTitle(item.title);
       this.onScroll();
     });
   }
 
   onScroll() {
-    this.post.comments = this.post.comments.concat(this.item.kids.slice(this.startIndex, this.startIndex + this.pageSize));
+    this.post.comments = this.post.comments.concat(this.post.article.kids.slice(this.startIndex, this.startIndex + this.pageSize));
     this.startIndex += this.pageSize;
   }
 

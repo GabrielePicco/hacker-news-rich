@@ -79,7 +79,7 @@ export class HackerNewsService {
     }
     story.content = mercuryStory.content;
     story.domain = mercuryStory.domain;
-    story.description = mercuryStory.excerpt;
+    story.description = mercuryStory.description;
     if (mercuryStory.excerpt !== undefined && mercuryStory.excerpt.length > story.description.length) {
       story.description = mercuryStory.excerpt;
     }

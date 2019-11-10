@@ -1,36 +1,36 @@
 <article>
-  <a (click)="vote(item.id.toString())" *ngIf="item !== undefined && hackerNewsUserService.isAuthenticated && direction == 'up';" data-placement="right" data-toggle="tooltip" title="Upvote" class="btn-circle btn-circle-lg btn-circle-white color-primary btn-circle-raised btn-card-float ml-4 mt-3 wow zoomInDown" style="left:0%">
+  <a (click)="vote(article.story.id.toString())" *ngIf="article.story !== undefined && hackerNewsUserService.isAuthenticated && direction == 'up';" data-placement="right" data-toggle="tooltip" title="Upvote" class="btn-circle btn-circle-lg btn-circle-white color-primary btn-circle-raised btn-card-float ml-4 mt-3 wow zoomInDown" style="left:0%">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <a (click)="vote(item.id.toString())" *ngIf="item !== undefined && hackerNewsUserService.isAuthenticated && direction == 'un';" data-placement="right" data-toggle="tooltip" title="Upvote" class="btn-circle btn-circle-lg btn-circle-white color-medium btn-circle-raised btn-card-float ml-4 mt-3 wow zoomInDown" style="left:0%">
+  <a (click)="vote(article.story.id.toString())" *ngIf="article.story !== undefined && hackerNewsUserService.isAuthenticated && direction == 'un';" data-placement="right" data-toggle="tooltip" title="Upvote" class="btn-circle btn-circle-lg btn-circle-white color-medium btn-circle-raised btn-card-float ml-4 mt-3 wow zoomInDown" style="left:0%">
     <span class="glyphicon glyphicon-chevron-down"></span>
   </a>
-  <div *ngIf="item !== undefined; else loading" class="card card-primary wow zoomInRight mb-4" style="visibility:hidden">
+  <div *ngIf="article.story !== undefined; else loading" class="card card-primary wow zoomInRight mb-4" style="visibility:hidden">
     <div class="card-body overflow-hidden card-body-big">
       <div class="row">
         <div class="col-xl-6">
-          <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" >
-            <img [src]="item.leadImageUrl" alt="" class="img-fluid mb-4">
+          <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" >
+            <img [src]="article.story.leadImageUrl" alt="" class="img-fluid mb-4">
           </a>
         </div>
         <div class="col-xl-6 mb-4">
-          <h3 class="no-mt"><a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" >{{item.title}}</a></h3>
+          <h3 class="no-mt"><a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" >{{article.story.title}}</a></h3>
           <h5>
-            <a href="{{ 'post/' + item.id }}"><span class="d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ item.score }} points</span></span></a>
-            <a href="{{ 'post/' + item.id }}"><span class="ml-1 d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ item.descendants }} comments</span></span></a>
-            <span class="ml-1 d-none d-sm-inline">{{item.domain}}</span>
+            <a href="{{ 'post/' + article.story.id }}"><span class="d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.score }} points</span></span></a>
+            <a href="{{ 'post/' + article.story.id }}"><span class="ml-1 d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.descendants }} comments</span></span></a>
+            <span class="ml-1 d-none d-sm-inline">{{article.story.domain}}</span>
           </h5>
-          <p [innerHTML]="((item.description !== undefined && item.description.length > 400 ? (item.description | slice:0:300) + '...' : item.description) | emojify)"></p>
+          <p [innerHTML]="((article.story.description !== undefined && article.story.description.length > 400 ? (article.story.description | slice:0:300) + '...' : article.story.description) | emojify)"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-8">
-          By <a href="profile/{{ item.by }}">{{item.by}}</a>
-          <span class="ml-1 d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
-          <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ item.time * 1000 | date: 'H:mm'}}</span></span>
+          By <a href="profile/{{ article.story.by }}">{{article.story.by}}</a>
+          <span class="ml-1 d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
+          <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'H:mm'}}</span></span>
         </div>
         <div class="col-lg-4 text-right">
-          <a href="{{ item.url != undefined ? item.url : 'post/' + item.id }}" target="{{ item.url != undefined ? '_blank' : '_self' }}" class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+          <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
         </div>
       </div>
     </div>
