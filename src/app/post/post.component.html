@@ -12,7 +12,7 @@
             <span class="ml-1">{{ post.article.domain }}</span>
           </div>
           <img [src]="post.article.leadImageUrl" class="img-fluid mb-4">
-          <p [innerHTML]="post.article.content === undefined ? post.article.text : post.article.content"></p>
+          <p *ngIf="post.article.content !== undefined || post.article.text != undefined" [innerHTML]="post.article.content === undefined ? post.article.text : post.article.content"></p>
           <br>
           <a *ngIf="post.article.url != undefined" [href]="post.article.url" target="_blank" class="btn btn-primary btn-raised btn-block animate-icon">Read the original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
         </div>
