@@ -80,7 +80,7 @@ export class HackerNewsService {
     story.content = mercuryStory.content;
     story.domain = mercuryStory.domain;
     story.description = mercuryStory.description;
-    if (mercuryStory.excerpt !== undefined && mercuryStory.excerpt.length > story.description.length) {
+    if (story.description === undefined && mercuryStory.excerpt !== undefined) {
       story.description = mercuryStory.excerpt;
     }
     return story;

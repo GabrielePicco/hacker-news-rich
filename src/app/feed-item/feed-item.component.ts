@@ -23,7 +23,6 @@ export class FeedItemComponent implements OnInit {
       this.article.story = item;
       this.hackerNewsService.getEnrichedStory(this.article.story).subscribe(itemRich => {
         this.article.story = itemRich;
-        console.log(itemRich);
       });
     });
   }
