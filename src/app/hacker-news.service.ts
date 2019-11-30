@@ -188,10 +188,8 @@ export class HackerNewsService {
               if (doc.exists) {
                 const mercuryStory = doc.data();
                 mercuryStory.lead_image_url = mercuryStory.leadImageUrl;
-                console.log('cached');
                 return of(HackerNewsService.enrichStory(story, mercuryStory));
               } else {
-                console.log('not cached');
                 return this.getMercuryEnrichedStory(story);
               }
             })

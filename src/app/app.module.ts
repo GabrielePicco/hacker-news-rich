@@ -26,6 +26,7 @@ import { ModalUserComponent } from './modal-user/modal-user.component';
 import { VoteButtonComponent } from './vote-button/vote-button.component';
 import { ModalSubmitComponent } from './modal-submit/modal-submit.component';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -60,6 +61,7 @@ import { GtagModule } from 'angular-gtag';
     EmojifyModule,
     ShareModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule,
     GtagModule.forRoot({ trackingId: 'UA-YOUR_TRACKING_ID', trackPageviews: true })
   ],
