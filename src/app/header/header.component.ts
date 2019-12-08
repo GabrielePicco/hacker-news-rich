@@ -12,7 +12,7 @@ import {HackerNewsUserService} from '../hacker-news-user.service';
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('header', {static: false}) header: ElementRef;
+  @ViewChild('header') header: ElementRef;
 
   constructor( private router: Router,
                private location: Location,

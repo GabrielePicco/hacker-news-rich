@@ -10,7 +10,7 @@ import {Login} from '../login.enum';
 })
 export class ModalUserComponent implements OnInit {
 
-  @ViewChild('closeAccountDialog', {static: false}) closeBtn: ElementRef;
+  @ViewChild('closeAccountDialog') closeBtn: ElementRef;
 
   error = {'title': '', 'desc': ''};
   loading = false;

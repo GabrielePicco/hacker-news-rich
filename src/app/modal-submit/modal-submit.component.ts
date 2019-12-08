@@ -12,7 +12,7 @@ import {HN_SECTION} from '../hacker-news.service';
 })
 export class ModalSubmitComponent implements OnInit {
 
-  @ViewChild('closeAccountDialog', {static: false}) closeBtn: ElementRef;
+  @ViewChild('closeAccountDialog') closeBtn: ElementRef;
 
   error = {'title': '', 'desc': ''};
   loading = false;
