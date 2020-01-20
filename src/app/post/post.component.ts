@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
               private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params.id;
     this.hackerNewsService.getStoryByID(this.id).subscribe((item: Story) => {
       this.post.article = item;
       this.hackerNewsService.getEnrichedStory(this.post.article).subscribe(itemRich => {
@@ -46,10 +46,7 @@ export class PostComponent implements OnInit {
 
   addComment(parentId: string, text: string) {
     if (text.length > 0) {
-      this.replyComment = new Comment();
-      this.replyComment.by = this.hackerNewsUserService.username;
-      this.replyComment.text = text;
-      this.replyComment.time = Date.now().toString();
+      this.replyComment = new Comment(this.hackerNewsUserService.username, text, Date.now().toString());
       this.hackerNewsUserService.comment(parentId, text);
     }
   }

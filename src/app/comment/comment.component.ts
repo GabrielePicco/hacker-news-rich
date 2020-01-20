@@ -23,14 +23,15 @@ export class CommentComponent implements OnInit {
     this.hackerNewsService.getCommentByID(this.id).subscribe(comment => this.comment = comment);
   }
 
-  addComment(parentId: string, text: string) {
+  addComment(parentId: number, text: string) {
     if (text.length > 0) {
       this.showReply = false;
-      this.replyComment = new Comment();
-      this.replyComment.by = this.hackerNewsUserService.username;
-      this.replyComment.text = text;
-      this.replyComment.time = Date.now().toString();
-      this.hackerNewsUserService.comment(parentId, text);
+      this.replyComment = new Comment(this.hackerNewsUserService.username, text, Date.now().toString());
+      this.hackerNewsUserService.comment(parentId.toString(), text);
     }
+  }
+
+  parseInt(text: string) {
+    return parseInt(text, 10);
   }
 }
