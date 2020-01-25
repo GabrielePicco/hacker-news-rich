@@ -12,7 +12,20 @@
             <span class="ml-1">{{ post.article.domain }}</span>
           </div>
           <img [src]="post.article.leadImageUrl" class="img-fluid mb-4">
-          <p *ngIf="post.article.content !== undefined || post.article.text != undefined" [innerHTML]="post.article.content === undefined ? post.article.text : post.article.content"></p>
+          <p [innerHTML]="((post.article.description !== undefined && post.article.description.length > 400 ? (post.article.description | slice:0:300) + '...' : post.article.description) | emojify)"></p>
+          <div class="ms-collapse" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="mb-0 card card-default">
+              <div class="card-header" role="tab" id="headingOne">
+                <h4 class="card-title ms-rotate-icon">
+                  <a class="collapsed" role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <i class="zmdi zmdi-file-text"></i> Show article </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="card-collapse collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                <div class="card-body" *ngIf="post.article.content !== undefined || post.article.text != undefined" [innerHTML]="post.article.content === undefined ? post.article.text : post.article.content"></div>
+              </div>
+            </div>
+          </div>
           <br>
           <a *ngIf="post.article.url != undefined" [href]="post.article.url" target="_blank" class="btn btn-primary btn-raised btn-block animate-icon">Read the original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
         </div>

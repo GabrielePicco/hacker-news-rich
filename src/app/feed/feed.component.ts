@@ -12,18 +12,20 @@ import {Title} from '@angular/platform-browser';
 export class FeedComponent implements OnInit {
 
   ids: number[];
-  current_section = HN_SECTION[0].name;
+  currentSection = HN_SECTION[0].name;
 
   constructor(private titleService: Title, private route: ActivatedRoute, private hackerNewsService: HackerNewsService,
               @Inject(DOCUMENT) private document) { }
 
   ngOnInit() {
     this.route.params.subscribe(routeParams => {
-      this.current_section = routeParams.section;
-      this.titleService.setTitle(`${this.hackerNewsService.TITLE} => ${this.current_section}`);
+      this.currentSection = routeParams.section;
+      this.titleService.setTitle(`${this.hackerNewsService.TITLE} => ${this.currentSection}`);
       this.ids = [];
       window.scroll(0, 0);
-      this.hackerNewsService.getNewsIDs(this.current_section).subscribe(ids => this.ids = ids);
+      if (this.ids === undefined || this.ids.length === 0) {
+        this.hackerNewsService.getNewsIDs(this.currentSection).subscribe(ids => this.ids = ids);
+      }
       this.document.activeElement.blur();
     });
   }

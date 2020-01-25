@@ -30,7 +30,8 @@
           <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'H:mm'}}</span></span>
         </div>
         <div class="col-lg-4 text-right">
-          <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" class="btn btn-primary btn-raised btn-block animate-icon">Read More <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+          <a href="{{ 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" class="btn btn-primary btn-raised btn-block animate-icon">Discussion <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+          <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" class="btn btn-primary btn-raised btn-block animate-icon">Original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
         </div>
       </div>
     </div>

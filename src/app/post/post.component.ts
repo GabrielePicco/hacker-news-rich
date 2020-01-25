@@ -32,7 +32,7 @@ export class PostComponent implements OnInit {
       this.post.article = item;
       this.hackerNewsService.getEnrichedStory(this.post.article).subscribe(itemRich => {
         this.post.article = itemRich;
-        this.post.article.content = this.sanitizer.bypassSecurityTrustHtml(this.post.article.content);
+        this.post.article.content = this.sanitizer.bypassSecurityTrustHtml(this.getSanitizedHtml(this.post.article));
       });
       this.titleService.setTitle(item.title);
       this.onScroll();
@@ -49,5 +49,25 @@ export class PostComponent implements OnInit {
       this.replyComment = new Comment(this.hackerNewsUserService.username, text, Date.now().toString());
       this.hackerNewsUserService.comment(parentId, text);
     }
+  }
+
+  /**
+   * Replace localhost with proper domain and add responsive class to all images
+   * @param article: the full article
+   */
+  getSanitizedHtml(article: Story): string {
+    const imgSrc = this.getImageSrcToRegex(article.leadImageUrl);
+    return article.content
+      .replace(new RegExp('<img(.)*src=\"\/', 'g'), `<img src=\"http:\/\/${article.domain}\/`)
+      .replace(new RegExp('<img(.)*src=\'\/', 'g'), `<img src=\'http:\/\/${article.domain}\/`)
+      .replace(new RegExp(`<img(.)*src=.${imgSrc}(.)*>`, 'g'), '')
+      .replace(new RegExp('<img', 'g'), '<img class=\'img-fluid mb-4\'');
+  }
+
+  getImageSrcToRegex(url: string): string {
+    return url
+      .replace(new RegExp(`\.jpg`, 'g'), '(.){0,10}\.jpg')
+      .replace(new RegExp(`\.png`, 'g'), '(.){0,10}\.png')
+      .replace(new RegExp(`\/`, 'g'), '.');
   }
 }
