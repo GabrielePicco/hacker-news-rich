@@ -1,6 +1,12 @@
-# NetlifyTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+
+# Hackernews
+
+Medium Post: https://medium.com/@PiccoGabriele/creating-and-hosting-an-hackernews-mirror-on-netlify-for-free-2b06e12cf77d
+
+Hacker News Mirror Reader with preview image and description + login, comments and submit in the original HN
+
+https://hacker-news.news/
 
 ## Development server
 
