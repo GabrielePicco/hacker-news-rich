@@ -6,7 +6,7 @@ Medium Post: https://medium.com/@PiccoGabriele/creating-and-hosting-an-hackernew
 
 Hacker News Mirror Reader with preview image and description + login, comments and submit in the original HN
 
-https://hacker-news.news/
+[hacker-news.news](https://hacker-news.news/)
 
 ## Development server
 
