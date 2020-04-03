@@ -2,11 +2,12 @@
 
 # Hackernews
 
-Medium Post: https://medium.com/@PiccoGabriele/creating-and-hosting-an-hackernews-mirror-on-netlify-for-free-2b06e12cf77d
-
 Hacker News Mirror Reader with preview image and description + login, comments and submit in the original HN
 
-[hacker-news.news](https://hacker-news.news/)
+
+
+Tutorial for the realization of the main components of the site: 
+[Creating and hosting an HackerNews mirror on Netlify for free](https://medium.com/@PiccoGabriele/creating-and-hosting-an-hackernews-mirror-on-netlify-for-free-2b06e12cf77d)
 
 ## Development server
 
