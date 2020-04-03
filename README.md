@@ -2,6 +2,8 @@
 
 # Hackernews
 
+![Hacker News header](https://miro.medium.com/max/1400/1*dVvWbWD0byNdKjPyTGbePA.png)
+
 Hacker News Mirror Reader with preview image and description + login, comments and submit in the original HN
 
 [hacker-news.news](https://www.hacker-news.news)
