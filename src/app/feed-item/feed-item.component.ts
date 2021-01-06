@@ -11,8 +11,9 @@ import {HackerNewsUserService} from '../hacker-news-user.service';
 export class FeedItemComponent implements OnInit {
 
   @Input() itemID: number;
-  @Input() showLoading: false;
-  article = {story : undefined}
+  @Input() animateIn = false;
+  @Input() showLoading = false;
+  article = {story : undefined};
   direction = 'up';
 
   constructor(private hackerNewsService: HackerNewsService,

@@ -1,7 +1,7 @@
 <div *ngIf="post.article != undefined; else loading" class="container" infiniteScroll (scrolled)="onScroll()">
   <div class="row">
     <div class="col-lg-8">
-      <div class="card animated fadeInLeftTiny animation-delay-5">
+      <div class="card">
         <div class="card-body card-body-big">
           <h1 class="no-mt"><app-vote-button [itemId]="post.article.id"></app-vote-button><a *ngIf="post.article.url != undefined" [href]="post.article.url" target="_blank">{{ post.article.title }}</a><span class="primary-color" *ngIf="post.article.url == undefined"> {{ post.article.title }} </span></h1>
           <div class="mb-4">
@@ -35,7 +35,7 @@
     <app-profile-sidebar [by]="post.article.by"></app-profile-sidebar>
     </div>
   </div>
-  <div class="row wow materialUp animation-delay-8">
+  <div class="row wow">
     <div class="col-md-12">
       <h2 class="color-primary right-line">Comments</h2>
       <div *ngIf="hackerNewsUserService.isAuthenticated && replyComment == undefined" class="card card-primary">
