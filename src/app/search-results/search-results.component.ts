@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HackerNewsSearchService} from '../hacker-news-search.service';
+import {HackerNewsSearchService} from '../_services/hacker-news-search.service';
 
 @Component({
   selector: 'app-search-results',

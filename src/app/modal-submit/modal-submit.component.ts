@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {HackerNewsUserService} from '../hacker-news-user.service';
-import {Submit} from '../submit.enum';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
+import {Submit} from '../_models/submit.enum';
 import {Router} from '@angular/router';
-import {HN_SECTION} from '../hacker-news.service';
+import {HN_SECTION} from '../_services/hacker-news.service';
 
 @Component({
   selector: 'app-modal-submit',

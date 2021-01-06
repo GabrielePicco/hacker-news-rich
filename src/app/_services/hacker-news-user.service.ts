@@ -3,10 +3,10 @@ import {CookieService} from 'ngx-cookie-service';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Login} from './login.enum';
-import {Credentials} from './credentials';
+import {Login} from '../_models/login.enum';
+import {Credentials} from '../_models/credentials';
 import * as CryptoJS from 'crypto-js';
-import {Submit} from './submit.enum';
+import {Submit} from '../_models/submit.enum';
 
 @Injectable({
   providedIn: 'root'

@@ -17,3 +17,13 @@
     padding-right: 30px;
   }
 }
+
+.article-preview{
+  height: 33rem;
+}
+
+@media (min-width: 992px) {
+  .article-preview {
+    height: 30rem;
+  }
+}

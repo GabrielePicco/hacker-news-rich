@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HackerNewsService} from '../hacker-news.service';
-import {User} from '../user';
+import {HackerNewsService} from '../_services/hacker-news.service';
+import {User} from '../_models/user';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 

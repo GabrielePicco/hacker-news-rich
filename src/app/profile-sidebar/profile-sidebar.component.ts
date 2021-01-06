@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HackerNewsService} from '../hacker-news.service';
-import {User} from '../user';
+import {HackerNewsService} from '../_services/hacker-news.service';
+import {User} from '../_models/user';
 
 @Component({
   selector: 'app-profile-sidebar',

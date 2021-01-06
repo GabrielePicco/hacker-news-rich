@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {HN_SECTION} from '../hacker-news.service';
+import {HN_SECTION} from '../_services/hacker-news.service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DOCUMENT, Location} from '@angular/common';
-import {HackerNewsSearchService} from '../hacker-news-search.service';
-import {HackerNewsUserService} from '../hacker-news-user.service';
+import {HackerNewsSearchService} from '../_services/hacker-news-search.service';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
 
 @Component({
   selector: 'app-sidebar',

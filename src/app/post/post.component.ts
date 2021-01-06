@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Story} from '../story';
-import {HackerNewsService} from '../hacker-news.service';
+import {Story} from '../_models/story';
+import {HackerNewsService} from '../_services/hacker-news.service';
 import {DomSanitizer, Title} from '@angular/platform-browser';
-import {HackerNewsUserService} from '../hacker-news-user.service';
-import {Comment} from '../comment';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
+import {Comment} from '../_models/comment';
 
 @Component({
   selector: 'app-post',

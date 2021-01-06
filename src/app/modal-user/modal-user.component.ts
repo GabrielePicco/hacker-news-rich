@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {HackerNewsUserService} from '../hacker-news-user.service';
-import {Login} from '../login.enum';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
+import {Login} from '../_models/login.enum';
 
 @Component({
   selector: 'app-modal-user',

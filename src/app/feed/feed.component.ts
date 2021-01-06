@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HackerNewsService, HN_SECTION} from '../hacker-news.service';
+import {HackerNewsService, HN_SECTION} from '../_services/hacker-news.service';
 import {DOCUMENT} from '@angular/common';
 import {Title} from '@angular/platform-browser';
 

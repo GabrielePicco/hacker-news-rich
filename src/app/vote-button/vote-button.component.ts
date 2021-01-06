@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HackerNewsUserService} from '../hacker-news-user.service';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
 
 @Component({
   selector: 'app-vote-button',

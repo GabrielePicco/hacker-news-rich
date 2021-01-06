@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, mergeMap} from 'rxjs/operators';
-import {Sorting} from './sorting.enum';
+import {Sorting} from '../_models/sorting.enum';
 
 @Injectable({
   providedIn: 'root'

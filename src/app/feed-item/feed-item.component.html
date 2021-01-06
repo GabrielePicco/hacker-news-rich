@@ -8,7 +8,7 @@
   <div *ngIf="article.story !== undefined; else loading" class="card card-primary mb-4 wow" [ngClass]="animateIn ? 'zoomInRight' : ''" style="visibility:hidden">
     <div class="card-body overflow-hidden card-body-big p-0">
       <div class="row">
-        <div class="col-md-4 pr-0" style="height: 30rem;">
+        <div class="col-md-4 pr-0 article-preview">
           <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" >
             <img [src]="article.story.leadImageUrl" alt="" class="w-100 h-100" style="object-fit: cover;">
           </a>

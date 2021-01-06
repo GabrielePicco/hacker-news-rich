@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HackerNewsService} from '../hacker-news.service';
-import {Story} from '../story';
+import {HackerNewsService} from '../_services/hacker-news.service';
+import {Story} from '../_models/story';
 
 @Component({
   selector: 'app-profile-activity',

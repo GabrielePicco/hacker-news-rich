@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HackerNewsService, HN_SECTION} from '../hacker-news.service';
-import {HackerNewsUserService} from '../hacker-news-user.service';
+import {HackerNewsService, HN_SECTION} from '../_services/hacker-news.service';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
 
 @Component({
   selector: 'app-navbar',

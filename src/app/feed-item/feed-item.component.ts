@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Story} from '../story';
-import {HackerNewsService} from '../hacker-news.service';
-import {HackerNewsUserService} from '../hacker-news-user.service';
+import {Story} from '../_models/story';
+import {HackerNewsService} from '../_services/hacker-news.service';
+import {HackerNewsUserService} from '../_services/hacker-news-user.service';
 
 @Component({
   selector: 'app-feed-item',
