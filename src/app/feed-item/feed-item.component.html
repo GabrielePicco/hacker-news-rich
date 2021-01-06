@@ -17,18 +17,18 @@
           <div class="p-1 h-md-100">
             <div style="height: 70%">
               <h2 class="m-0"><a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" >{{article.story.title}}</a></h2>
-              <h5 class="mt-1">
-                By <a href="profile/{{ article.story.by }}">{{article.story.by}}</a>
-                <a href="{{ 'post/' + article.story.id }}"><span class="ml-1 d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.score }} points</span></span></a>
-                <a href="{{ 'post/' + article.story.id }}"><span class="ml-1 d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.descendants }} comments</span></span></a>
-                <span class="ml-1 d-none d-sm-inline">{{article.story.domain}}</span>
-                <span class="ml-1 d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
-                <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'H:mm'}}</span></span>
+              <h5 class="mt-1" style="line-height: 2rem">
+                By <a class="mr-1" href="profile/{{ article.story.by }}">{{article.story.by}}</a>
+                <a href="{{ 'post/' + article.story.id }}"><span class="mr-1 d-sm-inline"><i class="zmdi zmdi-favorite mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.score }} points</span></span></a>
+                <a href="{{ 'post/' + article.story.id }}"><span class="mr-1 d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.descendants }} comments</span></span></a>
+                <span class="mr-1 d-sm-inline-block">{{article.story.domain}}</span>
+                <span class="mr-1 d-none d-sm-inline-block"><i class="zmdi zmdi-calendar mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'yyyy-MM-dd'}}</span></span>
+                <span class="d-none d-sm-inline-block"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">{{ article.story.time * 1000 | date: 'H:mm'}}</span></span>
               </h5>
               <p [innerHTML]="((article.story.description !== undefined && article.story.description.length > 400 ? (article.story.description | slice:0:300) + '...' : article.story.description) | emojify)"></p>
             </div>
             <div style="height: 30%">
-              <a href="{{ 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Discussion <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+              <a href="{{ 'post/' + article.story.id }}" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Discussion <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
               <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="{{ article.story.url != undefined ? '_blank' : '_self' }}" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
             </div>
           </div>
