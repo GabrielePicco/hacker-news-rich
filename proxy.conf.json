@@ -1,13 +1,18 @@
 {
   "/hackernews/*": {
-    "target":  {
-      "host": "localhost",
-      "protocol": "http:",
-      "port": 9000
-    },
+    "target":  "https://www.hacker-news.news/.netlify/functions/",
     "secure": false,
     "logLevel": "info",
     "changeOrigin": true,
     "pathRewrite": {"^/hackernews" : ""}
+  },
+  "/google/*": {
+    "target": "https://www.google.com/",
+    "secure": false,
+    "logLevel": "info",
+    "pathRewrite": {
+      "^/google": ""
+    },
+    "changeOrigin": true
   }
 }

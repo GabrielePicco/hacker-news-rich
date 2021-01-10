@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable, of, from} from 'rxjs';
-import {catchError, mergeMap, tap} from 'rxjs/operators';
+import {catchError, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {Story} from '../_models/story';
 import {User} from '../_models/user';
 import {Comment} from '../_models/comment';
@@ -10,13 +10,7 @@ import {HackerNewsSearchService} from './hacker-news-search.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import * as firebase from 'firebase';
-
-const mercuryHttpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'x-api-key': 'vNHCrF4nFnTVKD6I50YYiwZiJlVcgnDcnqwJYmjS'
-  })
-};
+import {GoogleImagesService} from './google-images.service';
 
 export const HN_SECTION = [
   {name: 'TopStory', subpath: 'topstories'},
@@ -36,6 +30,7 @@ export class HackerNewsService {
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
               private hackerNewsSearch: HackerNewsSearchService,
+              private googleImagesService: GoogleImagesService,
               private firestore: AngularFirestore) {
     this.route.params.subscribe(routeParams => {
       this.currentSection = routeParams.section;
@@ -66,11 +61,11 @@ export class HackerNewsService {
   TITLE = 'Hacker News';
 
   /**
-   * Enrich a story with the info retrievied with a mercury URL query
+   * Enrich a story with the info retrieved with a mercury URL query
    * @param story: the story to be enriched
    * @param mercuryStory: the mercury query result
    */
-  private static enrichStory(story: Story, mercuryStory): Story {
+  private enrichStory(story: Story, mercuryStory): Story {
     if (story === undefined || mercuryStory === undefined) {
       return story;
     }
@@ -90,7 +85,7 @@ export class HackerNewsService {
    * Return a User object given an username
    * @param username: the username
    */
-  getUserByUsername(username: String): Observable<User> {
+  getUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(this.baseApiUrl + 'user/' + username + '.json').pipe(catchError(this.handleError(null)),
       mergeMap((user: User) => {
         user.profileImage = 'assets/img/demo/m' + this.getRandomInt(1, 4) + '.png';
@@ -127,7 +122,7 @@ export class HackerNewsService {
    * Get a story from the HN API, enriching the information querying the article URL with the mercury API
    * @param id: the HN story ID
    */
-  getEnrichedStoryByID(id: Number): Observable<Story> {
+  getEnrichedStoryByID(id: number): Observable<Story> {
     return this.http.get<Story>(this.baseApiUrl + 'item/' + id + '.json')
       .pipe(
         catchError(this.handleError(null)),
@@ -141,12 +136,11 @@ export class HackerNewsService {
    * Get a story from the HN API
    * @param id: the HN story ID
    */
-  getStoryByID(id: Number): Observable<Story> {
+  getStoryByID(id: number): Observable<Story> {
     return this.http.get<Story>(this.baseApiUrl + 'item/' + id + '.json')
       .pipe(
         catchError(this.handleError(null)),
         mergeMap((story: Story) => {
-          story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
           story.description = story.text;
           return of(story);
         })
@@ -154,10 +148,19 @@ export class HackerNewsService {
   }
 
   /**
+   * Get a default image based on a string (used as the pseudo-random seed)
+   * @param seed: the string seed
+   */
+  getDefaultImage(seed: string): string {
+    const rnd = seed.charCodeAt(0) + seed.charCodeAt(1) + seed.charCodeAt(2);
+    return this.defaultStoryImageUrls[rnd % this.defaultStoryImageUrls.length];
+  }
+
+  /**
    * Return the parent Story (not enriched) given an id
    * @param id: the story ID
    */
-  getParentStoryByID(id: Number): Observable<Story> {
+  getParentStoryByID(id: number): Observable<Story> {
     return this.http.get<Story>(this.baseApiUrl + 'item/' + id + '.json')
       .pipe(
         catchError(this.handleError(null)),
@@ -177,9 +180,6 @@ export class HackerNewsService {
    * @param story: the story HN item
    */
   getEnrichedStory(story: Story): Observable<Story> {
-    if (story.leadImageUrl === undefined) {
-      story.leadImageUrl = this.defaultStoryImageUrls[this.getRandomInt(0, this.defaultStoryImageUrls.length - 1)];
-    }
     if (story.url !== undefined) {
       try {
         return from(this.cache.doc(story.id.toString()).ref.get())
@@ -188,7 +188,7 @@ export class HackerNewsService {
               if (doc.exists) {
                 const mercuryStory = doc.data();
                 mercuryStory.lead_image_url = mercuryStory.leadImageUrl;
-                return of(HackerNewsService.enrichStory(story, mercuryStory));
+                return of(this.enrichStory(story, mercuryStory));
               } else {
                 return this.getMercuryEnrichedStory(story);
               }
@@ -199,8 +199,24 @@ export class HackerNewsService {
       }
     } else {
       story.description = story.text;
-      return of(story);
+      return this.getGoogleEnrichedStory(story);
     }
+  }
+
+  /**
+   * Enrich the story retrieving information from Google
+   * @param story: the simple HN story
+   */
+  getGoogleEnrichedStory(story): Observable<Story> {
+    const query = story.title.replace('Show HN:', '').replace('Ask HN:', '').replace('Tell HN:', '').replace('Show HN:', '');
+    return this.googleImagesService.searchImage(query)
+      .pipe(
+        switchMap((img: string) => {
+          story.leadImageUrl = img;
+          return of(story);
+        }),
+        catchError(this.handleError(story))
+      );
   }
 
   /**
@@ -208,16 +224,29 @@ export class HackerNewsService {
    * @param story: the simple HN story
    */
   getMercuryEnrichedStory(story): Observable<Story> {
-    return this.http.get(this.mercuryBaseApiUrl + story.url)
+    return of(story)
       .pipe(
-        mergeMap(mercuryStory => {
-          story = HackerNewsService.enrichStory(story, mercuryStory);
-          try {
-            this.cache.doc(story.id.toString()).set(story);
-          } catch (e) {
-            console.log(e);
+        switchMap(s => {
+          return this.http.get(this.mercuryBaseApiUrl + s.url)
+            .pipe(
+              mergeMap(mercuryStory => {
+                s = this.enrichStory(s, mercuryStory);
+                return of(s);
+              }),
+              catchError(this.handleError(story))
+            );
+        }),
+        switchMap((s: Story) => {
+          if (s.leadImageUrl === undefined) {
+            return this.getGoogleEnrichedStory(s);
           }
-          return of(story);
+          return of(s);
+        }),
+        tap(s => {
+          try {
+            this.cache.doc(story.id.toString()).set(s);
+          } catch (e) {
+          }
         }),
         catchError(this.handleError(story))
       );
@@ -228,7 +257,7 @@ export class HackerNewsService {
    * @param section: the HN section
    */
   getNewsIDs(section = HN_SECTION[0].name): Observable<number[]> {
-    const selectedSection = HN_SECTION.filter(function (item) {
+    const selectedSection = HN_SECTION.filter( (item) => {
       return item.name === section;
     })[0];
     section = selectedSection.subpath;

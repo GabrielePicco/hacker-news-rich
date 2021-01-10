@@ -24,4 +24,8 @@ export class ProfileActivityComponent implements OnInit {
     });
   }
 
+  onImgError(event, title: string) {
+    event.target.src = this.hackerNewsService.getDefaultImage(title);
+  }
+
 }

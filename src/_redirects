@@ -1,2 +1,3 @@
 /hackernews/*   https://www.hacker-news.news/.netlify/functions/:splat  200
+/google/*  https://www.google.com/:splat  200
 /*  /index.html 200
