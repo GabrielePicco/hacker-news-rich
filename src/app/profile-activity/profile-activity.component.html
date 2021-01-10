@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-sm-4 zoom-img">
           <a [href]="'post/' + parentStory.id">
-            <img [src]="parentStory.leadImageUrl" alt="" class="img-fluid mb-4">
+            <img [src]="parentStory.leadImageUrl ? parentStory.leadImageUrl : ''" alt="" class="img-fluid mb-4" (error)="onImgError($event, parentStory.title)">
           </a>
         </div>
         <div class="col-sm-8">

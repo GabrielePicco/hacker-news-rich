@@ -70,4 +70,8 @@ export class PostComponent implements OnInit {
       .replace(new RegExp(`\.png`, 'g'), '(.){0,10}\.png')
       .replace(new RegExp(`\/`, 'g'), '.');
   }
+
+  onImgError(event, title: string) {
+    event.target.src = this.hackerNewsService.getDefaultImage(title);
+  }
 }

@@ -20,11 +20,11 @@ export class FeedItemComponent implements OnInit {
               public hackerNewsUserService: HackerNewsUserService) { }
 
   ngOnInit() {
-    this.hackerNewsService.getStoryByID(this.itemID).subscribe((item: Story) => {
-      this.article.story = item;
-      this.hackerNewsService.getEnrichedStory(this.article.story).subscribe(itemRich => {
+    this.hackerNewsService.getStoryByID(this.itemID).subscribe((story: Story) => {
+      this.hackerNewsService.getEnrichedStory(story).subscribe(itemRich => {
         this.article.story = itemRich;
       });
+      this.article.story = story;
     });
   }
 
@@ -37,5 +37,9 @@ export class FeedItemComponent implements OnInit {
       this.article.story.score -= 1;
       this.direction = 'up';
     }
+  }
+
+  onImgError(event, title: string) {
+    event.target.src = this.hackerNewsService.getDefaultImage(title);
   }
 }

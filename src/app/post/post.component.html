@@ -11,7 +11,7 @@
             <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-comments mr-05 color-info"></i> <span class="color-medium-dark">{{ post.article.descendants }}</span></span>
             <span class="ml-1">{{ post.article.domain }}</span>
           </div>
-          <img [src]="post.article.leadImageUrl" class="img-fluid mb-4">
+          <img [src]="post.article.leadImageUrl ? post.article.leadImageUrl : ''" alt="" class="img-fluid mb-4" (error)="onImgError($event, post.article.title)">
           <p [innerHTML]="((post.article.description !== undefined && post.article.description.length > 400 ? (post.article.description | slice:0:300) + '...' : post.article.description) | emojify)"></p>
           <div class="ms-collapse" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="mb-0 card card-default">
