@@ -1,11 +1,12 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: 'AIzaSyDzaOPlkLkzs-Zxy1OrW1zEXqX1ueDbUBU',
-    authDomain: 'hackernews-e0c75.firebaseapp.com',
-    databaseURL: 'https://hackernews-e0c75.firebaseio.com',
-    projectId: 'hackernews-e0c75',
-    storageBucket: 'hackernews-e0c75.appspot.com',
-    messagingSenderId: '914185917144'
+    apiKey: 'AIzaSyBY2vx80l9IFqAsQa5HbIsQTDnpfqJhml8',
+    authDomain: 'hackernews-602a0.firebaseapp.com',
+    appId: '1:1064136208448:web:6fbe7acfa36537cdcd6fa5',
+    databaseURL: 'https://hackernews-602a0.firebaseio.com',
+    projectId: 'hackernews-602a0',
+    storageBucket: 'hackernews-602a0.appspot.com',
+    messagingSenderId: '1064136208448'
   }
 };

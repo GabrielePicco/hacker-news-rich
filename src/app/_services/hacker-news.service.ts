@@ -215,6 +215,14 @@ export class HackerNewsService {
           story.leadImageUrl = img;
           return of(story);
         }),
+        tap(s => {
+          try {
+            if (s.leadImageUrl) {
+              this.cache.doc(story.id.toString()).set(s);
+            }
+          } catch (e) {
+          }
+        }),
         catchError(this.handleError(story))
       );
   }
@@ -244,7 +252,9 @@ export class HackerNewsService {
         }),
         tap(s => {
           try {
-            this.cache.doc(story.id.toString()).set(s);
+            if (s.leadImageUrl) {
+              this.cache.doc(story.id.toString()).set(s);
+            }
           } catch (e) {
           }
         }),
