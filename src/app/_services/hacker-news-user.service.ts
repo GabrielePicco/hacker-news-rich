@@ -61,7 +61,7 @@ export class HackerNewsUserService {
         catchError(this.handleError(null))
       );
     password = CryptoJS.AES.encrypt(password, username).toString();
-    this.cookieService.set('userinfo', `${username}&${password}`, 5000, undefined, undefined, true, 'Lax');
+    this.cookieService.set('userinfo', `${username}&${password}`, 5000, undefined, undefined, true, 'None');
     this.username = username;
     this.isAuthenticated = true;
     return of(Login.Ok);
