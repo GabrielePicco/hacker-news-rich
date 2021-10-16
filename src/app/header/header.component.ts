@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit {
                private location: Location,
                private hackerNewsSearchService: HackerNewsSearchService,
                public hackerNewsUserService: HackerNewsUserService,
-               @Inject(DOCUMENT) public document: Document) { }
+               @Inject(DOCUMENT) public document: Document) {
+  }
 
   ngOnInit() {
   }

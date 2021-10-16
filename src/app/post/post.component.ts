@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Story} from '../_models/story';
 import {HackerNewsService} from '../_services/hacker-news.service';
-import {DomSanitizer, Title} from '@angular/platform-browser';
+import {DomSanitizer, Title, Meta} from '@angular/platform-browser';
 import {HackerNewsUserService} from '../_services/hacker-news-user.service';
 import {Comment} from '../_models/comment';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-post',
@@ -21,10 +22,12 @@ export class PostComponent implements OnInit {
   private pageSize = 3;
 
   constructor(private titleService: Title,
+              private meta: Meta,
               private route: ActivatedRoute,
               private hackerNewsService: HackerNewsService,
               public hackerNewsUserService: HackerNewsUserService,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
@@ -33,6 +36,7 @@ export class PostComponent implements OnInit {
       this.hackerNewsService.getEnrichedStory(this.post.article).subscribe(itemRich => {
         this.post.article = itemRich;
         this.post.article.content = this.sanitizer.bypassSecurityTrustHtml(this.getSanitizedHtml(this.post.article));
+        this.setMeta(this.post.article);
       });
       this.titleService.setTitle(item.title);
       this.onScroll();
@@ -51,11 +55,15 @@ export class PostComponent implements OnInit {
     }
   }
 
+  onImgError(event, title: string) {
+    event.target.src = this.hackerNewsService.getDefaultImage(title);
+  }
+
   /**
    * Replace localhost with proper domain and add responsive class to all images
    * @param article: the full article
    */
-  getSanitizedHtml(article: Story): string {
+  private getSanitizedHtml(article: Story): string {
     const imgSrc = this.getImageSrcToRegex(article.leadImageUrl);
     return article.content
       .replace(new RegExp('<img(.)*src=\"\/', 'g'), `<img src=\"http:\/\/${article.domain}\/`)
@@ -64,14 +72,26 @@ export class PostComponent implements OnInit {
       .replace(new RegExp('<img', 'g'), '<img class=\'img-fluid mb-4\'');
   }
 
-  getImageSrcToRegex(url: string): string {
+  private getImageSrcToRegex(url: string): string {
     return url
       .replace(new RegExp(`\.jpg`, 'g'), '(.){0,10}\.jpg')
       .replace(new RegExp(`\.png`, 'g'), '(.){0,10}\.png')
       .replace(new RegExp(`\/`, 'g'), '.');
   }
 
-  onImgError(event, title: string) {
-    event.target.src = this.hackerNewsService.getDefaultImage(title);
+  private setMeta(article: Story) {
+    // this.meta.updateTag({ name: 'keywords', content: article.title });
+    this.meta.updateTag({ name: 'description', content: article.description });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:title', content: article.title });
+    this.meta.updateTag({ name: 'twitter:text:title', content: article.title });
+    this.meta.updateTag({ name: 'twitter:description', content: article.description });
+    this.meta.updateTag({ name: 'twitter:image', content: article.leadImageUrl });
+    this.meta.updateTag({ name: 'twitter:image:alt', content: article.leadImageUrl });
+    this.meta.updateTag({ property: 'og:title', content : article.title });
+    this.meta.updateTag({ property: 'og:url', content: document.location.href });
+    this.meta.updateTag({ property: 'og:image', content: article.leadImageUrl });
+    this.meta.updateTag({ property: 'og:image:alt', content: article.leadImageUrl });
+    this.meta.updateTag({ property: 'og:description', content: article.description });
   }
 }

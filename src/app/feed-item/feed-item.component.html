@@ -30,10 +30,10 @@
             <div style="height: 20%">
               <div class="row mt-0 mb-0 pb-0 pt-0">
                 <div class="col-md-6 mt-0 mb-0 pb-0 pt-0">
-                  <a href="{{ 'post/' + article.story.id }}" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Discussion <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+                  <a [routerLink]="'/post/' + article.story.id" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Discussion <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
                 </div>
                 <div class="col-md-6 mt-0 mb-0 pb-0 pt-0">
-                  <a href="{{ article.story.url != undefined ? article.story.url : 'post/' + article.story.id }}" target="_blank" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+                  <a href="{{ article.story.url != undefined ? article.story.url : '/post/' + article.story.id }}" target="_blank" class="btn btn-sm btn-primary btn-raised btn-block animate-icon">Original article <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
                 </div>
               </div>
             </div>
