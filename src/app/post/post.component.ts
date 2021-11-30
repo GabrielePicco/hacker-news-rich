@@ -33,8 +33,10 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    if(this.id === 27583549){
+    // Fix DMCA complaint about this page
+    if(this.id == 27583549){
         this.router.navigate(['/']);
+        this.id = 0;
     }
     this.hackerNewsService.getStoryByID(this.id).subscribe((item: Story) => {
       this.post.article = item;
