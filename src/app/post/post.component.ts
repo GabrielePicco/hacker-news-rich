@@ -28,7 +28,7 @@ export class PostComponent implements OnInit {
               private hackerNewsService: HackerNewsService,
               public hackerNewsUserService: HackerNewsUserService,
               private sanitizer: DomSanitizer,
-              private router: Router
+              private router: Router,
               @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
