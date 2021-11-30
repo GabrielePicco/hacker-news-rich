@@ -32,7 +32,8 @@ export class PostComponent implements OnInit {
               @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
-    if(this.id == 27583549){
+    this.id = this.route.snapshot.params.id;
+    if(this.id === 27583549){
         this.router.navigate(['/']);
     }
     this.hackerNewsService.getStoryByID(this.id).subscribe((item: Story) => {
