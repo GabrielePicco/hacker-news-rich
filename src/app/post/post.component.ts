@@ -6,6 +6,7 @@ import {DomSanitizer, Title, Meta} from '@angular/platform-browser';
 import {HackerNewsUserService} from '../_services/hacker-news-user.service';
 import {Comment} from '../_models/comment';
 import {DOCUMENT} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -27,10 +28,13 @@ export class PostComponent implements OnInit {
               private hackerNewsService: HackerNewsService,
               public hackerNewsUserService: HackerNewsUserService,
               private sanitizer: DomSanitizer,
+              private router: Router
               @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
+    if(this.id == 27583549){
+        this.router.navigate(['/']);
+    }
     this.hackerNewsService.getStoryByID(this.id).subscribe((item: Story) => {
       this.post.article = item;
       this.hackerNewsService.getEnrichedStory(this.post.article).subscribe(itemRich => {
