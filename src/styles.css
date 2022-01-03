@@ -8818,7 +8818,15 @@ pre.line-numbers > code {
   transition: all ease .4s
 }
 
+.card-header .card-title a i {
+  transition: all ease .4s
+}
+
 .card-code-header .card-code-title a:hover, .card-code-header .card-code-title a:focus {
+  text-decoration: none
+}
+
+.card-header .card-title a:hover, .card-header .card-title a:focus {
   text-decoration: none
 }
 
@@ -8834,11 +8842,24 @@ pre.line-numbers > code {
   transition: all ease .4s
 }
 
+.card-header .card-title a:after {
+  transform: rotate(0);
+  transition: all ease .4s
+}
+
 .card-code-header .card-code-title a.collapsed i {
   transform: rotate(180deg)
 }
 
 .card-code-header .card-code-title a.collapsed:after {
+  transform: rotate(90deg)
+}
+
+.card-header .card-title a.collapsed i {
+  transform: rotate(90deg)
+}
+
+.card-header .card-title a.collapsed:after {
   transform: rotate(90deg)
 }
 

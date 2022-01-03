@@ -9,11 +9,16 @@
         By <a href="/profile/{{ comment.by }}" > {{ comment.by }} </a>
         <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ parseInt(comment.time) * 1000 | date: 'yyyy-MM-dd'}}</span></span>
         <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ parseInt(comment.time) * 1000 | date: 'H:mm'}}</span></span>
+        <a class="ml-1 d-none d-sm-inline float-right dropdown-toggle animated fadeIn color-primary black-hover" *ngIf="comment.kids != undefined && comment.kids.length > 0" data-toggle="collapse" aria-expanded="true" role="button" href="#comment-id-{{ comment.id }}">
+          <i class="zmdi zmdi-chevron-down"></i>{{ comment.kids.length }} reply
+        </a>
       </h3>
     </div>
-    <div class="card-body">
-      <p [innerHTML]="comment.text"></p>
-      <a *ngIf="hackerNewsUserService.isAuthenticated" (click)="showReply = true" href="javascipt:void(0)"> reply </a>
+    <div >
+      <div class="card-body">
+        <p [innerHTML]="comment.text"></p>
+        <a *ngIf="hackerNewsUserService.isAuthenticated" (click)="showReply = true" href="javascipt:void(0)"> reply </a>
+      </div>
     </div>
   </div>
 
@@ -26,7 +31,7 @@
     </div>
   </div>
 
-  <div *ngIf="comment.kids != undefined || replyComment != undefined" class="row">
+  <div *ngIf="comment.kids != undefined || replyComment != undefined" class="row collapse show" id="comment-id-{{ comment.id }}">
     <div class="col-md-12">
       <ul class="ms-timeline">
         <li *ngIf="replyComment != undefined" class="ms-timeline-item wow fadeInRight">
