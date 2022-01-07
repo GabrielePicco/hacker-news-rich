@@ -9,7 +9,7 @@
         By <a href="/profile/{{ comment.by }}" > {{ comment.by }} </a>
         <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-calendar mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ parseInt(comment.time) * 1000 | date: 'yyyy-MM-dd'}}</span></span>
         <span class="ml-1 d-none d-sm-inline"><i class="zmdi zmdi-time mr-05 color-medium-dark"></i> <span class="color-medium-dark">{{ parseInt(comment.time) * 1000 | date: 'H:mm'}}</span></span>
-        <a class="ml-1 d-none d-sm-inline float-right dropdown-toggle animated fadeIn color-primary black-hover" *ngIf="comment.kids != undefined && comment.kids.length > 0" data-toggle="collapse" aria-expanded="true" role="button" href="#comment-id-{{ comment.id }}">
+        <a class="ml-1 d-inline float-right dropdown-toggle animated fadeIn color-primary black-hover" *ngIf="comment.kids != undefined && comment.kids.length > 0" data-toggle="collapse" aria-expanded="true" role="button" href="#comment-id-{{ comment.id }}">
           <i class="zmdi zmdi-chevron-down"></i>{{ comment.kids.length }} reply
         </a>
       </h3>
