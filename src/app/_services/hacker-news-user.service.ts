@@ -48,7 +48,7 @@ export class HackerNewsUserService {
         mergeMap((result: string) => {
           if (result.length > 2000) {
             password = CryptoJS.AES.encrypt(password, username).toString();
-            this.cookieService.set('userinfo', `${username}&${password}`, 5000);
+            this.cookieService.set('userinfo', `${username}&${password}`, 5000, undefined, undefined, true, 'None');
             this.username = username;
             this.isAuthenticated = true;
             return of(Login.Ok);
@@ -60,11 +60,6 @@ export class HackerNewsUserService {
         }),
         catchError(this.handleError(null))
       );
-    password = CryptoJS.AES.encrypt(password, username).toString();
-    this.cookieService.set('userinfo', `${username}&${password}`, 5000, undefined, undefined, true, 'None');
-    this.username = username;
-    this.isAuthenticated = true;
-    return of(Login.Ok);
   }
 
 
