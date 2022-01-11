@@ -1,5 +1,5 @@
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/787b9161-54ba-4604-8f4e-b84852d9bad3/deploy-status)](https://app.netlify.com/sites/hacker-news-rich/deploys)
 # Hackernews
 
 ![Hacker News header](https://miro.medium.com/max/1400/1*dVvWbWD0byNdKjPyTGbePA.png)
