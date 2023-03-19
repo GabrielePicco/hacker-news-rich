@@ -51,7 +51,15 @@ export class HackerNewsService {
     'https://hacker-news.news/assets/img/29.jpg',
     'https://hacker-news.news/assets/img/30.jpg',
     'https://hacker-news.news/assets/img/31.jpg',
-    'https://hacker-news.news/assets/img/32.jpg'
+    'https://hacker-news.news/assets/img/32.jpg',
+    'https://hacker-news.news/assets/img/33.jpg',
+    'https://hacker-news.news/assets/img/34.jpg',
+    'https://hacker-news.news/assets/img/35.jpg',
+    'https://hacker-news.news/assets/img/36.jpg',
+    'https://hacker-news.news/assets/img/37.jpg',
+    'https://hacker-news.news/assets/img/38.jpg',
+    'https://hacker-news.news/assets/img/39.jpg',
+    'https://hacker-news.news/assets/img/40.jpg'
   ];
   private newsIDs: number[] = [];
   private currentPosition: number;
