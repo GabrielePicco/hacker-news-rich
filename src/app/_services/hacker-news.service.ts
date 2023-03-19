@@ -40,18 +40,18 @@ export class HackerNewsService {
   private baseApiUrl = 'https://hacker-news.firebaseio.com/v0/';
   private mercuryBaseApiUrl = '/hackernews/parse?url=';
   private defaultStoryImageUrls = [
-    'https://i.imgur.com/DX877VD.png',
-    'https://i.imgur.com/o0CDhjr.jpg',
-    'https://i.imgur.com/QGeDXnG.png',
-    'https://i.imgur.com/LnMirAw.png',
-    'https://i.imgur.com/0TaSNEy.png',
-    'https://i.imgur.com/XzHiGKy.jpg',
-    'https://i.imgur.com/aWvC7UB.png',
-    'https://i.imgur.com/64ShGwN.jpg',
-    'https://i.imgur.com/TwzilYz.png',
-    'https://i.imgur.com/oyRsrCZ.jpg',
-    'https://i.imgur.com/DIVgtHa.png',
-    'https://i.imgur.com/k3C388y.jpg'
+    'https://hacker-news.news/assets/img/3.jpg',
+    'https://hacker-news.news/assets/img/4.jpg',
+    'https://hacker-news.news/assets/img/5.jpg',
+    'https://hacker-news.news/assets/img/6.jpgg',
+    'https://hacker-news.news/assets/img/7.jpg',
+    'https://hacker-news.news/assets/img/8.jpg',
+    'https://hacker-news.news/assets/img/9.jpg',
+    'https://hacker-news.news/assets/img/28.jpg',
+    'https://hacker-news.news/assets/img/29.jpg',
+    'https://hacker-news.news/assets/img/30.jpg',
+    'https://hacker-news.news/assets/img/31.jpg',
+    'https://hacker-news.news/assets/img/32.jpg'
   ];
   private newsIDs: number[] = [];
   private currentPosition: number;
