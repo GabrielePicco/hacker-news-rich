@@ -24,7 +24,7 @@
     "@ngx-share/core": "^7.1.4",
     "angular-emojify": "^1.0.0",
     "angular-gtag": "^1.0.4",
-    "crypto-js": "^3.1.9-1",
+    "crypto-js": "^3.2.1",
     "firebase": "^7.6.2",
     "firestore": "^1.1.6",
     "ngx-cookie-service": "^2.3.0",
