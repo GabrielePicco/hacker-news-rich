@@ -21,6 +21,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.route.snapshot.params['username'];
+    
+    // Redirect to home if the username is blocked
+    if (this.username?.toLowerCase() === 'nora-puchreiner') {
+      this.router.navigate(['/']);
+      return;
+    }
+    
     this.hackerNewsService.getUserByUsername(this.username).subscribe(user => {
       this.user = user;
       this.onScroll();
